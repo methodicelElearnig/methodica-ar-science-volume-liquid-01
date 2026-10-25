@@ -354,7 +354,7 @@ function advanceFromS0() { goTo(1); }
    learner watches to the end to unlock Continue (same as the
    reference); re-entering after finishing leaves Continue unlocked.
    ═══════════════════════════════════════════════════════════ */
-const S3_YT_VIDEO_ID = 'mE4r3rECnyc';
+const S3_YT_VIDEO_ID = 'lYn6pld-VXM';
 let s3VideoWatched = false;
 let s3YtPlayer     = null;
 let s3YtApiLoading = false;
