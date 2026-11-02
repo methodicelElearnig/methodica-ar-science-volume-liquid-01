@@ -1,0 +1,148 @@
+{
+  "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/",
+  "title": "وقت التمرين",
+  "learningUnitId": "methodica-ar-science-volume-liquid-01",
+  "componentPurpose": "practice",
+  "isAssessment": false,
+  "recommendedAfterFail": [],
+  "isRequired": true,
+  "relativeDifficulty": 3,
+  "masteryLevel": null,
+  "order": 2,
+  "depthLevel": "core-curriculum-basic",
+  "cognitiveLevels": [
+    "applying-a-model-or-procedure"
+  ],
+  "languages": [
+    "Arabic"
+  ],
+  "skills": [],
+  "createdAt": "2026-10-25T00:00:00.000Z",
+  "updatedAt": "2026-10-25T00:00:00.000Z",
+  "estimatedTimeInMinutes": 12,
+  "subContent": [
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-001/",
+      "title": "نقطة القراءة الصحيحة في المخبار",
+      "informationToBot": "מטרת הפריט: תרגול זיהוי נקודת הקריאה הנכונה בעקומה (מניסקוס) שנוצרת כשמים נצמדים לדופן כלי המדידה. מה התלמיד אמור להבין/לתרגל: קוראים את גובה הנוזל לפי הנקודה הנמוכה ביותר בעקומה, לא מעל העקומה ולא בגובה העקומה. טעויות נפוצות: קריאה לפי החלק העליון של העקומה (מקום שהעין נוטה להתמקד בו ראשון).",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-001/q1",
+          "questionType": "choice",
+          "questionText": "يظهر في الصورة مخبار مدرّج يحتوي على ماء. يلتصق الماء قليلًا بالجدار، ولذلك يشكل سطح السائل انحناءً. اضغطوا على نقطة القراءة التي نقيس عندها.",
+          "answers": [
+            "أ. فوق الانحناء",
+            "ب. على مستوى الانحناء",
+            "ت. عند أدنى نقطة في الانحناء"
+          ],
+          "correctAnswers": [
+            "ت. عند أدنى نقطة في الانحناء"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-002/",
+      "title": "نتيجة موثوقة – معدل ثلاثة قياسات",
+      "informationToBot": "מטרת הפריט: תרגול חישוב ממוצע משלוש מדידות והערכת מהימנות התוצאות. מה התלמיד אמור להבין/לתרגל: סעיף א - חישוב ממוצע של 30, 28, 32 מ״ל שווה 30 מ״ל. סעיף ב - התוצאות קרובות זו לזו ולכן המדידה מהימנה. טעויות נפוצות: טעות בחישוב ממוצע (למשל בחירת אחד מהערכים במקום ממוצע כולל); קביעה שגויה שהמדידה אינה מהימנה למרות שהתוצאות קרובות.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-002/q1",
+          "questionType": "choice",
+          "questionText": "قاست دنيا كمية الماء نفسها 3 مرات وحصلت على النتائج التالية: 30، 28، 32 ملل. أ. ما هو معدل القياسات الثلاثة؟",
+          "answers": [
+            "30",
+            "31",
+            "32"
+          ],
+          "correctAnswers": [
+            "30"
+          ]
+        },
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-002/q2",
+          "questionType": "true-false",
+          "questionText": "ب. هل القياسات موثوقة؟",
+          "answers": [
+            "نعم",
+            "لا"
+          ],
+          "correctAnswers": [
+            "نعم"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-003/",
+      "title": "قياس فادي وياسمين – من على صواب؟",
+      "informationToBot": "מטרת הפריט: תרגול זיהוי טעות מדידה שכיחה - אורי ומאיה מדדו את אותו נפח נוזל וקיבלו תוצאות שונות (50 מ״ל לעומת 48 מ״ל). מה התלמיד אמור להבין/לתרגל: קריאה בגובה העין היא השיטה המוסכמת והמדויקת - מדידתה של מאיה נכונה, ולא ניתן לקבוע נכונות לפי גודל המספר שהתקבל. טעויות נפוצות: הנחה שמספר גדול יותר משקף מדידה 'טובה יותר'; הנחה שקריאה מלמעלה מדויקת יותר כי 'רואים טוב יותר'.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-003/q1",
+          "questionType": "choice",
+          "questionText": "قاس فادي وياسمين حجم سائل معين. قرأ فادي 50 ملل. وقرأت ياسمين 48 ملل. أي قياس صحيح؟",
+          "answers": [
+            "قياس فادي - يمكن الرؤية بشكل أفضل من الأعلى",
+            "قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة",
+            "النتيجتان صحيحتان ولا مشكلة في ذلك",
+            "على الأرجح قياس فادي - لأن الرقم الذي حصل عليه أكبر"
+          ],
+          "correctAnswers": [
+            "قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-004/",
+      "title": "اختيار أداة دقيقة لقياس 10 ملل",
+      "informationToBot": "מטרת הפריט: תרגול בחירת כלי מדידה לפי דיוק נדרש - מדידת 10 מ״ל נוזל מתוך בחירה בין פיפטה לכוס כימית של 500 מ״ל. מה התלמיד אמור להבין/לתרגל: פיפטה מתאימה יותר לכמות קטנה ומדויקת כמו 10 מ״ל, בעוד כוס כימית גדולה מתאימה למדידה גסה בלבד. טעויות נפוצות: בחירת הכלי הגדול יותר מתוך הנחה שגודל הכלי אינו משפיע על דיוק המדידה.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-004/q1",
+          "questionType": "choice",
+          "questionText": "علينا قياس 10 ملل من السائل. بأي أداة يمكننا قياس الكمية بدقّة أكبر؟",
+          "answers": [
+            "ماصّة",
+            "دورق بسِعة 500 ملل"
+          ],
+          "correctAnswers": [
+            "ماصّة"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-005/",
+      "title": "جرعة دواء دقيقة لكلب",
+      "informationToBot": "מטרת הפריט: תרגול בחירת כלי מדידה מדויק בתרחיש וטרינרי - וטרינר נותן לכלב קטן תרופה במינון 1.5 מ״ל, ויש לבחור מתוך משורת ליטר, מזרק 5 מ״ל, כוס כימית של 100 מ״ל, ופיפטה של 25 מ״ל. מה התלמיד אמור להבין/לתרגל: מזרק קטן (5 מ״ל) הוא הכלי המתאים לכמות קטנה ומדויקת כזו - כלים גדולים יותר (משורת ליטר, כוס כימית, פיפטה של 25 מ״ל) אינם מדויקים דיים לכמות כה קטנה. טעויות נפוצות: בחירת כלי לפי זמינותו ולא לפי התאמת טווח המדידה לכמות הנדרשת.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-005/q1",
+          "questionType": "choice",
+          "questionText": "يعطي طبيب بيطري كلبًا صغيرًا دواء بجرعة 1.5 ملل. أي أداة عليه أن يختار لقياس كمية الدواء بدقّة؟",
+          "answers": [
+            "مخبار مدرّج بسِعة لتر واحد (1000 ملل)",
+            "محقنة بسِعة 5 ملل",
+            "دورق بسِعة 100 ملل",
+            "ماصّة بسِعة 25 ملل"
+          ],
+          "correctAnswers": [
+            "محقنة بسِعة 5 ملل"
+          ]
+        }
+      ]
+    }
+  ]
+}

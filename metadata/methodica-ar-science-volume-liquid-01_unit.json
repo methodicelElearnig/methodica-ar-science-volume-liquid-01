@@ -1,0 +1,17 @@
+{
+  "id": "methodica-ar-science-volume-liquid-01",
+  "title": "قياس حجم السائل وأدوات القياس",
+  "subTopic": "MOE.SCI.G7.CHEM.BODY-MAT-PROP.VOLUME",
+  "learningObjective": "MOE.SCI.G7.CHEM.BODY-MAT-PROP.VOLUME.INSTRUMENTS",
+  "targetSectors": [
+    "state-general",
+    "state-religious"
+  ],
+  "targetAudience": "general",
+  "manufacturer": "310",
+  "languages": [
+    "Arabic"
+  ],
+  "createdAt": "2026-10-25T00:00:00.000Z",
+  "updatedAt": "2026-10-25T00:00:00.000Z"
+}

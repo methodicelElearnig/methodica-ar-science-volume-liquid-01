@@ -1,0 +1,131 @@
+{
+  "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/",
+  "title": "وقت التمرين 2",
+  "learningUnitId": "methodica-ar-science-volume-liquid-01",
+  "componentPurpose": "practice",
+  "isAssessment": false,
+  "recommendedAfterFail": [
+    "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/"
+  ],
+  "isRequired": true,
+  "relativeDifficulty": 2,
+  "masteryLevel": null,
+  "order": 3,
+  "depthLevel": "core-curriculum-basic",
+  "cognitiveLevels": [
+    "applying-a-model-or-procedure"
+  ],
+  "languages": [
+    "Arabic"
+  ],
+  "skills": [],
+  "createdAt": "2026-10-25T00:00:00.000Z",
+  "updatedAt": "2026-10-25T00:00:00.000Z",
+  "estimatedTimeInMinutes": 10,
+  "subContent": [
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-001/",
+      "title": "أداة قياس لكوب عصير البرتقال",
+      "informationToBot": "מטרת הפריט: תרגול בסיסי לבחירת כלי המדידה המתאים למדידת כמות המיץ בכוס מלאה. מה התלמיד אמור להבין/לתרגל: משורה היא הכלי המתאים למדידת נפח נוזל, בעוד כף, סרגל ומאזניים דיגיטליים אינם כלים למדידת נפח (כף - כלי אכילה, סרגל - מדידת אורך, מאזניים - מדידת מסה). טעויות נפוצות: בלבול בין כלי מדידת נפח לכלי מדידת אורך/מסה.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-001/q1",
+          "questionType": "choice",
+          "questionText": "ما هي الأداة المناسبة لقياس كمية العصير في الكوب المملوء بعصير البرتقال بدقة؟ اضغطوا على الإجابة الصحيحة.",
+          "answers": [
+            "مخبار مدرّج",
+            "ملعقة",
+            "مسطرة",
+            "ميزان رقمي"
+          ],
+          "correctAnswers": [
+            "مخبار مدرّج"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-002/",
+      "title": "تمييز أدوات قياس الحجم بين عدة أدوات",
+      "informationToBot": "מטרת הפריט: תרגול בסיסי בזיהוי כלים המיועדים למדידת נפח נוזל מתוך רשימה מעורבת של כלי מדידה. מה התלמיד אמור להבין/לתרגל: משורה, מזרק וכוס מדידה הם כלים המודדים נפח נוזל; סרגל מודד אורך, מאזניים דיגיטליים מודדים מסה, ושעון עצר מודד זמן - אף אחד מהם אינו כלי למדידת נפח. טעויות נפוצות: בחירת פחות/יותר משלושה כלים; בחירת כלי ממקצוע מדידה אחר (אורך/מסה/זמן) מתוך הרגל.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-002/q1",
+          "questionType": "choice",
+          "questionText": "اختاروا الأدوات الثلاث التي تقيس حجم السوائل. يمكن اختيار حتى 3 إجابات.",
+          "answers": [
+            "مخبار مدرّج",
+            "مسطرة",
+            "ميزان رقمي",
+            "ساعة توقيت",
+            "كوب قياس",
+            "محقنة"
+          ],
+          "correctAnswers": [
+            "مخبار مدرّج",
+            "كوب قياس",
+            "محقنة"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-003/",
+      "title": "معدل قياسين وهل يكفيان",
+      "informationToBot": "מטרת הפריט: תרגול בסיסי בחישוב ממוצע והבנת החשיבות של שלוש מדידות (ולא שתיים) למהימנות. מה התלמיד אמור להבין/לתרגל: סעיף א - ממוצע של 20 ו-22 מ״ל הוא 21 מ״ל. סעיף ב - שתי מדידות אינן מספיקות לקביעת מהימנות; עדיף לבצע שלוש מדידות כדי לדייק. טעויות נפוצות: חישוב שגוי של הממוצע; הנחה ששתי מדידות מספיקות כי הן 'קרובות'.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-003/q1",
+          "questionType": "numeric",
+          "questionText": "قاست طالبة نفس الكمية مرتين: 20 و-22 ملل. أ. ما هو المعدل؟",
+          "answers": [],
+          "correctAnswers": [
+            21
+          ]
+        },
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-003/q2",
+          "questionType": "choice",
+          "questionText": "ب. هل القياسان كافيان؟",
+          "answers": [
+            "نعم، القياسان كافيان",
+            "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة",
+            "لا يوجد فرق"
+          ],
+          "correctAnswers": [
+            "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-004/",
+      "title": "موثوقية قياسات أمل ومها",
+      "informationToBot": "מטרת הפריט: תרגיל ברמת קושי גבוהה יותר (בונוס בתוך רכיב התרגול הבסיסי) - עדי ואלמוג מדדו כל אחת 3 פעמים את אותה כמות נוזל, ולשתיהן אותו ממוצע (50 מ״ל) אך פיזור תוצאות שונה. מה התלמיד אמור להבין/לתרגל: מהימנות נמדדת לפי קרבת התוצאות זו לזו (טווח קטן), ולא רק לפי הממוצע - גם כשהממוצע זהה, מדידות עם טווח קטן יותר (של עדי) מהימנות יותר. טעויות נפוצות: הנחה שממוצע זהה משמעו מהימנות זהה, בלי להתייחס לפיזור התוצאות. מידע נוסף - נתוני השאלה (התמונות בלוחות; הנתונים מופיעים בטקסט החלופי בגרסה הערבית, לוח אמל = לוח עדי, לוח מها = לוח אלמוג): לוח אמל: מדידה 1 – 51 מ״ל, מדידה 2 – 50 מ״ל, מדידה 3 – 49 מ״ל (ממוצע 50). לוח מها: מדידה 1 – 30 מ״ל, מדידה 2 – 50 מ״ל, מדידה 3 – 70 מ״ל (ממוצע 50). אמל - התוצאות קרובות זו לזו (טווח 2 מ״ל) ולכן מהימנה יותר; מها - התוצאות מפוזרות (טווח 40 מ״ל).",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-004/q1",
+          "questionType": "choice",
+          "questionText": "لوح أمل: القياس 1 – 51 ملل، القياس 2 – 50 ملل، القياس 3 – 49 ملل. لوح مها: القياس 1 – 30 ملل، القياس 2 – 50 ملل، القياس 3 – 70 ملل. قاست كلٌّ من أمل ومها كمية السائل نفسها 3 مرات. كتبت كل منهما نتائج القياس على لوحها. ومعدل كلتيهما 50 ملل. أيهما نتائجها أكثر موثوقية؟",
+          "answers": [
+            "مها، لأن المجال أكبر",
+            "أمل، لأن القياسات متقاربة من بعضها البعض",
+            "لا فرق في الموثوقية لأن المعدل متساوٍ",
+            "لا يمكن المعرفة"
+          ],
+          "correctAnswers": [
+            "أمل، لأن القياسات متقاربة من بعضها البعض"
+          ]
+        }
+      ]
+    }
+  ]
+}

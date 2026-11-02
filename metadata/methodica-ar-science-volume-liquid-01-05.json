@@ -1,0 +1,70 @@
+{
+  "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/",
+  "title": "هيا نتحدى أنفسنا",
+  "learningUnitId": "methodica-ar-science-volume-liquid-01",
+  "componentPurpose": "practice",
+  "isAssessment": false,
+  "recommendedAfterFail": [],
+  "isRequired": false,
+  "relativeDifficulty": 5,
+  "masteryLevel": null,
+  "order": 5,
+  "depthLevel": "core-curriculum-basic",
+  "cognitiveLevels": [
+    "analyzing"
+  ],
+  "languages": [
+    "Arabic"
+  ],
+  "skills": [],
+  "createdAt": "2026-10-25T00:00:00.000Z",
+  "updatedAt": "2026-10-25T00:00:00.000Z",
+  "estimatedTimeInMinutes": 4,
+  "subContent": [
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-001/",
+      "title": "جرعة دواء بحسب وزن الجسم",
+      "informationToBot": "מטרת הפריט: תרגיל מתקדם המשלב קריאת תווית תרופה באנגלית וחישוב פרופורציה - לפי התווית, המנה המומלצת היא כפית (5 מ״ל) לכל 10 ק״ג משקל גוף, ועילאי שוקל 30 ק״ג. מה התלמיד אמור להבין/לתרגל: יש לחשב שעילאי שוקל פי 3 מ-10 ק״ג, ולכן מנתו היא 3 כפיות = 15 מ״ל. טעויות נפוצות: חישוב מנה אחת (5 מ״ל) בלי להכפיל לפי משקל הגוף בפועל; בלבול במונחים האנגליים (Dose/TSP/Body Weight).",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-001/q1",
+          "questionType": "choice",
+          "questionText": "يظهر أمامكم دواء أمريكي مع تعليمات باللغة الإنجليزية على الملصق. معنى الملصق بالعربية: الجرعة الموصى بها - ملعقة صغيرة واحدة لكل 10 كغم من وزن الجسم. قاموس المصطلحات: Dose: الجرعة/المقدار؛ TSP (teaspoon): ملعقة صغيرة (5 ملل في القياس الطبّي)؛ Body Weight: وزن الجسم. وزن علاء 30 كغم. على كم ملل سيحصل؟",
+          "answers": [
+            "5 ملل",
+            "10 ملل",
+            "15 ملل"
+          ],
+          "correctAnswers": [
+            "15 ملل"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-002/",
+      "title": "الكتلة والحجم – من على صواب، سامر أم سوسن؟",
+      "informationToBot": "מטרת הפריט: תרגיל מתקדם המבחין בין מדידת מסה למדידת נפח, ומיישם את הידיעה ש-1 גרם מים = 1 מ״ל מים - עידו מדד מסה נטו של מים בבקבוק (500 גרם), תמר מדדה את הנפח (500 מ״ל), ושניהם טוענים שיש להם חצי ליטר מים. מה התלמיד אמור להבין/לתרגל: לכל חומר יש גם מסה וגם נפח, ועבור מים במיוחד היחס בין גרם למ״ל הוא 1:1 - ולכן שתי המדידות השונות (מסה ונפח) מוליכות לאותה מסקנה בדיוק, ושניהם צודקים. טעויות נפוצות: הנחה שמדידת מסה תמיד מדויקת יותר ממדידת נפח (או להיפך); אי-הבנה שמסה ונפח הם תכונות שונות שמתקשרות זו לזו רק דרך הצפיפות של החומר הספציפי. מידע נוסף: הפריט מסתיים בסרטון קצר על 'כפית שמצילה חיים' - תוכן העשרה חותם ללא שאלה מוערכת נוספת.",
+      "contentType": "practice",
+      "mediaFormat": "interactive-content",
+      "questions": [
+        {
+          "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-002/q1",
+          "questionType": "choice",
+          "questionText": "قاس سامر الكتلة الصافية للماء في القنينة، ووجد أن كتلته 500 غرام. قاست سوسن حجم الماء في نفس القنينة ووجدت أنه 500 ملل. ادّعى كلاهما: \"لدي قنينة تحتوي على نصف لتر من الماء\". معلوم: 1 غرام ماء = 1 ملل الماء. مَن مِنهم على صواب – سوسن أم سامر؟",
+          "answers": [
+            "سوسن فقط على صواب، لأنه لا يمكن معرفة الحجم من خلال قياس الكتلة.",
+            "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط.",
+            "سامر فقط على صواب، لأن قياس الكتلة دائمًا أدقّ من قياس حجم السائل.",
+            "كلاهما مخطئ، لأن الكتلة والحجم لا يعنيان الشيء نفسه."
+          ],
+          "correctAnswers": [
+            "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط."
+          ]
+        }
+      ]
+    }
+  ]
+}
