@@ -614,7 +614,13 @@ function New-ComponentFileBody {
         }
     }
 
-    $afterFail = @(foreach ($r in (ConvertTo-JsonArray $Comp.recommendedAfterFail)) { "$UrlPrefix/$(Get-Slug ([string] $r))/" })
+    # An IRI that KATA already holds is kept as it is: one unit can hold components under two prefixes
+    # (here the Hebrew …/720active/science/… and the Arabic …/720active/ar/science/…), and rebuilding
+    # every link from the one unit-wide $UrlPrefix dropped the 'ar/' (2026-11-02). Bare keys are rebuilt.
+    $afterFail = @(foreach ($r in (ConvertTo-JsonArray $Comp.recommendedAfterFail)) {
+        $s = ([string] $r).Trim()
+        if ($s -match '^https?://') { $s.TrimEnd('/') + '/' } else { "$UrlPrefix/$(Get-Slug $s)/" }
+    })
 
     $items = foreach ($it in ((ConvertTo-JsonArray $Comp.subContent) | Sort-Object { [int] $_.order })) {
         $script:counts.items++

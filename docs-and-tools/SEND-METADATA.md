@@ -11,8 +11,16 @@
 > - `retrieve-metadata.ps1` reads the parent unit by default, so its snapshot also holds the seven
 >   Hebrew components (warnings for them are expected).
 >
-> Nothing has been sent for the Arabic components yet. Order: `-DryRun`, `-Preflight`, live create,
-> `retrieve-metadata.ps1`, `-Status`, `-Publish` — each live step only on an explicit go.
+> Order: `-DryRun`, `-Preflight`, live create, `retrieve-metadata.ps1`, `-Status`, `-Publish` — each
+> live step only on an explicit go.
+>
+> **2026-11-02 runs** (logs in this folder, `*-2026-11-02*.log`): preflight — parent unit exists, all 7
+> Arabic components absent; **live create — created=30 (7 components, 23 items), 03 → 02 linked,
+> failed=0**; retrieve — the unit now holds 14 components (7 Hebrew + 7 Arabic) and 46 items, the Arabic
+> records equal `metadata/` except `learningUnitId`, which KATA sets to the parent unit (expected; the 30
+> warnings are the Hebrew records, absent from this repo's `metadata/`); status — 7 × draft.
+> **Not published yet.** `retrieve-metadata.ps1` fix the same day: an absolute `recommendedAfterFail`
+> IRI is kept as KATA holds it (it was rebuilt from the unit-wide prefix and lost `ar/`).
 
 > **methodica-science-volume-liquid-01 (2026-09-28):** copied from methodica-science-mass-weight-01.
 > `ContentBaseUrl` = `https://lomdot.education.gov.il/metodica/720/science/volume-liquid/01` — **assumed**
