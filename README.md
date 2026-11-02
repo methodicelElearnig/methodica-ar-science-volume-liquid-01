@@ -1,16 +1,55 @@
-# methodica-science-volume-liquid-01
+# methodica-ar-science-volume-liquid-01
 
-720 learning-module (לומדה) — a 7th–8th grade science unit on measuring
-liquid volume, built as a sequence of parts. Each `methodica-science-volume-liquid-01-0N`
+**Arabic build** of the 720 learning-module (לומדה) `methodica-science-volume-liquid-01` — a 7th–8th grade science unit on measuring
+liquid volume, built as a sequence of parts. Each `methodica-ar-science-volume-liquid-01-0N`
 subfolder is one statically-served component (its own `index.html` / `css/` /
 `js/` / `assets/`) covering one segment of the unit. Code and assets that are
 identical across parts live once, in the shared folders at the repo root.
+
+
+## Arabic build
+
+This repo is the Arabic twin of `methodica-science-volume-liquid-01`: the learner sees Arabic only, and
+the behaviour (screens, scoring, gates, xAPI, resume, routing) is identical to Hebrew `895a4ea`
+(2026-10-08). Checked 2026-11-02: with translated text masked out, every `js/main.js` and the
+structure of every `index.html` match Hebrew.
+
+**Identity.** Every id is the Hebrew one with `ar/` after `/720active/` and `methodica-ar-` for
+`methodica-` (`unit-js/10-identity.js`, `metadata/`). Kata has no Arabic unit: the seven Arabic
+components join the Hebrew unit `methodica-science-volume-liquid-01` (`docs-and-tools/send-metadata.ps1`,
+parent-unit mode). `XAPI_UNIT_ID` / `learningUnitId` stay `methodica-ar-science-volume-liquid-01`. The
+character and nav-edge storage keys and the resume state keys (from the folder names) carry `ar`, so
+Hebrew and Arabic state never mix in one browser. Hosting (content, not ids):
+`https://lomdot.education.gov.il/metodica/720/ar/science/volume-liquid/01/` — to confirm with the deployment.
+
+**Metadata** (supplied 2026-11-02, then aligned with Hebrew behaviour): question ids `…/<item>/qN`
+(the supplied `…/?q=qN` broke the item result after a reload, fix O-8); 01-007 q2 is `fill-in` with one
+Arabic answer string, as in Hebrew; part 03 `isRequired: true`, as in Hebrew. Kept as supplied:
+`languages: ["Arabic"]`, the 06/07 `informationToBot` (assessment: no help), the 07 q1 answers without a
+unit, as the dropdown shows them.
+
+**Arabic-only differences from Hebrew** (deliberate):
+- Fonts: `Calibri, Arial, sans-serif` everywhere (system fonts, no `@font-face`), including the canvas
+  text in part 01.
+- Issue report: the learner sees `REPORT_TYPE_DISPLAY` (Arabic); `REPORT_TYPE_LABELS`, the value posted
+  to the form all 720 units share, stays Hebrew so the sheet stays filterable (`unit-js/25-report.js`).
+- Layout fixes for longer Arabic text: the hint-popup close button (`unit-css/scq.css`), 01 S9 speech
+  bubble, the 03 "هل القياسان كافيان؟" dropdown at 15px, the 07 S4 distractor pills.
+- Part 05 video: `mE4r3rECnyc` (Hebrew: `lYn6pld-VXM`).
+- Arabic images: 06 `recipe-1950-note.png`, `recipe-online.png`; 07 `OrangeJuiceBottle.png`.
+
+**Open:** four images still carry Hebrew lettering and need Arabic versions from design (same name and
+size, no code change): `-03/assets/img/Adi-Board.png`, `-03/assets/img/Almog-Board.png` ("מדידה 1/2/3"),
+`-01/assets/img/DrinksAndMeasure.png` and `-05/assets/img/Bottle-Weight.png` ("מ"ל").
+
+Translation working files at the root (`lomda-transilation.md`, the `.xlf`) never ship: the package
+takes no root files.
 
 ## Layout
 
 ```
 unit-css/     shared stylesheets
-  base.css              fonts, reset, subject tokens, canvas, flag/continue buttons  (all parts, loaded first)
+  base.css              font stack, reset, subject tokens, canvas, flag/continue buttons  (all parts, loaded first)
   scq.css               SingleChoiceQuestion engine styles                           (all parts)
   img-zoom.css          image-zoom button + modal core                               (01 02 03 05 06)
   progress-question.css question-progress nav                                        (02 03 05)
@@ -27,9 +66,9 @@ unit-js/      shared scripts, loaded before each part's js/main.js (90-boot.js a
   05-motion.js          animation-system engine
   00-util.js · 30-nav.js · 32-navlabels.js · 35-popup.js · 38-progress.js
   90-boot.js            boot: resume restore, boot cover, first-screen back button
-unit-assets/  fonts (Assistant woff2) and images used by more than one part
+unit-assets/  images used by more than one part (no web fonts: Calibri/Arial, see *Arabic build*)
 metadata/     catalogue metadata: <unit>_unit.json + one <unit>-0N.json per component
-methodica-science-volume-liquid-01-0N/   index.html, index_dev.html, css/style.css, js/main.js, assets/
+methodica-ar-science-volume-liquid-01-0N/   index.html, index_dev.html, css/style.css, js/main.js, assets/
 _test/        headless regression harness + local stand-in for the 720 library   (never shipped)
 docs-and-tools/  packaging, Kata metadata send/retrieve, state reset/save tools   (never shipped)
 ```
@@ -85,7 +124,7 @@ root-served test would hide shows up as a 404):
 
 ```bash
 npx http-server .. -p 8080
-# then open http://localhost:8080/methodica-science-volume-liquid-01/methodica-science-volume-liquid-01-0N/index.html
+# then open http://localhost:8080/methodica-ar-science-volume-liquid-01/methodica-ar-science-volume-liquid-01-0N/index.html
 ```
 
 Add `?dev=1` to walk from part to part. Each part also ships an
@@ -110,10 +149,11 @@ not by registration). Then `__stmts()`, `__state()`, `__dupes()` in the console.
 node _test/verify-report.js
 ```
 
-508 checks: catalogue identity vs `metadata/`, screen maps, layer wiring and
+557 checks: catalogue identity vs `metadata/`, screen maps, layer wiring and
 `?v=` parity, routing behind `DEV_NAV`, the YouTube canary, resume hooks and
 flush placement, the asset contract (exact case), and a jsdom run of every
-part with the stub. `node _test/mutations.js` proves 8 deliberate defects are
+part with the stub, plus section 8 for the Arabic build (`lang="ar"`, no Hebrew outside comments,
+no Hebrew-unit slug or key). `node _test/mutations.js` proves 11 deliberate defects are
 caught. A real Kata run is not covered by anything local.
 
 ## Packaging and metadata
@@ -131,7 +171,7 @@ caught. A real Kata run is not covered by anything local.
 ## Character
 
 Chosen in part 01 S0 and stored in the component's resume state, mirrored in
-`localStorage['methodica_science_volume_liquid_01_selectedCharacter']` — a
+`localStorage['methodica_ar_science_volume_liquid_01_selectedCharacter']` — a
 per-unit key, not the origin-wide `lomda_selectedCharacter` other units share.
 Every part reads it through `getCharacter()` (`unit-js/00-util.js`).
 
@@ -149,7 +189,7 @@ makes the IFrame API append **`forigin`** taken from `window.location.href`; the
 **`widget_referrer`** from the same href. Once reporting is on, that href carries the platform's
 xAPI credentials (`?slxapi=…`), so both would have sent them to Google.
 
-Now `ytMountIframe()` in `methodica-science-volume-liquid-01-05/js/main.js` replaces the
+Now `ytMountIframe()` in `methodica-ar-science-volume-liquid-01-05/js/main.js` replaces the
 placeholder with an iframe whose `src` it builds itself (`ytEmbedSrc()`: `enablejsapi=1`,
 `origin` from `location.origin` only, `referrerpolicy="strict-origin-when-cross-origin"`), and
 `YT.Player` attaches to that iframe with events only — no `videoId`/`host`/`playerVars`, so the
@@ -159,12 +199,12 @@ pattern. Background: `Documentation/reporting-and-resume/KNOWN-ISSUE-youtube-for
 ## Shared conventions
 
 All parts follow the same 720 engine conventions: a 1280×710 canvas
-scaled to the viewport, RTL Hebrew layout, a shared screen-navigation
+scaled to the viewport, RTL Arabic layout, a shared screen-navigation
 state machine (`goTo`/`resetScreenState`/keyboard nav), and the same
 question-template shapes (SingleChoiceQuestion, MultipleChoiceQuestion,
 FlipCardsReveal, DragAndDropQuestion, ValueInputQuestion, DropdownQuestion).
 Character choice made in part 01 is carried over to every subsequent
 part (see *Character*).
 
-See `methodica-science-volume-liquid-01-03/README.md` for a detailed
+See `methodica-ar-science-volume-liquid-01-03/README.md` for a detailed
 write-up of that part's specific screen patterns.
