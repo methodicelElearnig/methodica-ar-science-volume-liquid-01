@@ -37,10 +37,13 @@ unit, as the dropdown shows them.
   bubble, the 03 "هل القياسان كافيان؟" dropdown at 15px, the 07 S4 distractor pills.
 - Part 05 video: `mE4r3rECnyc` (Hebrew: `lYn6pld-VXM`).
 - Arabic images: 06 `recipe-1950-note.png`, `recipe-online.png`; 07 `OrangeJuiceBottle.png`.
+- Images edited in place (2026-11-02), only the lettering, same names and sizes: 03 `Adi-Board.png`,
+  `Almog-Board.png` ("מדידה N" -> "القياس N", Segoe UI over the handwritten digits, which were kept);
+  01 `DrinksAndMeasure.png` (six "מ"ל" -> "ملل" on the two cylinders) and 05 `Bottle-Weight.png`
+  ("מ"ל" -> "ملل" under "500 mL"), Arial Bold. A designer may still want to redraw the board headers
+  by hand.
 
-**Open:** four images still carry Hebrew lettering and need Arabic versions from design (same name and
-size, no code change): `-03/assets/img/Adi-Board.png`, `-03/assets/img/Almog-Board.png` ("מדידה 1/2/3"),
-`-01/assets/img/DrinksAndMeasure.png` and `-05/assets/img/Bottle-Weight.png` ("מ"ל").
+No image carries Hebrew lettering any more (checked 2026-11-02, every raster image).
 
 Translation working files at the root (`lomda-transilation.md`, the `.xlf`) never ship: the package
 takes no root files.
