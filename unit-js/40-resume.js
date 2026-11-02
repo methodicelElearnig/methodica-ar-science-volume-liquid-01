@@ -141,7 +141,7 @@ function emptyUnitState() {
    units with incompatible values, and adoptUnitCharacter copied the foreign value into each
    component's Kata document. Part 01's S0 writes it through setUnitCharacter, and every part reads it
    through getCharacter() (unit-js/00-util.js), which accepts only this unit's two characters. */
-var UI_CHARACTER_KEY = 'methodica_science_volume_liquid_01_selectedCharacter';
+var UI_CHARACTER_KEY = 'methodica_ar_science_volume_liquid_01_selectedCharacter';
 /* ⚠️ Exactly the keys this unit's parts write. A key missing here never reaches the document's
    `results`, so its reader falls back to localStorage only — i.e. a second device reads null.
    This unit writes none (2026-09-28): part 02's 4-of-5 branch to 03/04 is computed in memory at
@@ -460,7 +460,7 @@ function sendCompletedOnce(ledger, key, objectType, result, opts) {
    מניסיון קודם עלולה לשלוח לומד למסלול שהוא לא עבר בפעם הזאת. */
 /* ⚠️ נושא את slug היחידה במכוון. שתי יחידות שחולקות את המפתח הזה חולקות יומן,
    וכל אחת משתיקה בשקט את הדיווחים של השנייה. */
-var NAV_EDGE_KEY = 'lomda_nav_edges::methodica-science-volume-liquid-01';
+var NAV_EDGE_KEY = 'lomda_nav_edges::methodica-ar-science-volume-liquid-01';
 
 function _readEdges() {
   try {

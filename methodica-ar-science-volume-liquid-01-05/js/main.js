@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   methodica-science-volume-liquid-01-05 — main.js
+   methodica-ar-science-volume-liquid-01-05 — main.js
    Part 05 of the liquid-volume lomda. 4 screens:
      S0  TransitionScreen        (companion video) — slide 37.
      S1  SingleChoiceQuestion    (medication-label question) — slide
@@ -33,7 +33,7 @@ const TOTAL_SCREENS = 4;  // S0–S3 — bump as more slides from the deck are i
    Screen-level resume is intentionally OUT OF SCOPE (owned by the resume
    branch) — back lands on the previous part's LAST screen via the
    '#last' deep link, which cold-starts that screen. ───────────────── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const THIS_PART     = LOMDA_ID + '-05';
 const S0_BACK_ID    = 's0-back';
@@ -430,7 +430,7 @@ function initS3Player() {
   if (s3YtPlayer) return;
   loadYouTubeApi(function () {
     if (s3YtPlayer) return;
-    const iframe = ytMountIframe('s3-youtube-player', S3_YT_VIDEO_ID, 'סרטון: כפית שמצילה חיים', '640', '360');
+    const iframe = ytMountIframe('s3-youtube-player', S3_YT_VIDEO_ID, 'فيديو: ملعقة تنقذ الأرواح', '640', '360');
     if (!iframe) return;
     /* Attach to OUR iframe: no videoId / host / playerVars here, so the API
        never rebuilds the src (that is where forigin would come from). */
@@ -861,10 +861,10 @@ var SCREEN_TO_SUBCONTENT = {
   3: ['001', 2]     // video "a spoon that saves lives" — reported against 001
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-05';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-05';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '001': 1, '002': 1 };
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-05.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-05.json';
 var XAPI_END_BTN       = 's3-continue';   // the part's last button (restoreEndedButton, D-8)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════

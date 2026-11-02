@@ -1,9 +1,17 @@
 'use strict';
 /* ═══════════════════ xAPI (720) — identity ═══════════════════
-   Shared by the seven parts of methodica-science-volume-liquid-01. Loaded first of the reporting
-   layer. Source: methodica-science-mass-weight-01/unit-js/10-identity.js (itself from
+   Shared by the seven parts of methodica-ar-science-volume-liquid-01, the Arabic twin of
+   methodica-science-volume-liquid-01. Loaded first of the reporting layer. Source:
+   methodica-science-mass-weight-01/unit-js/10-identity.js (itself from
    methodica-science-mass-measure-03), values replaced for this unit.
    Procedure: 2026/Documentation/reporting-and-resume/ADDING-REPORTING-AND-RESUME.md.
+
+   Arabic identity (2026-11-02): every id is the Hebrew one with "ar/" after /720active/ and
+   "methodica-ar-" for "methodica-", as in metadata/. In Kata there is no Arabic unit: the seven
+   Arabic components join the Hebrew unit methodica-science-volume-liquid-01 (docs-and-tools/
+   send-metadata.ps1, parent-unit mode). XAPI_UNIT_ID stays the Arabic slug, as learningUnitId in
+   every component JSON. The storage keys in 40-resume.js carry "ar" too, so Hebrew and Arabic
+   state never mix in one browser.
 
    Every id the lomda reports is built from these values and must match metadata/*.json byte for
    byte — including the trailing slash, which this unit's catalogue carries on component and item
@@ -11,22 +19,22 @@
    against metadata/ on 2026-09-28; 50-loader.js compares XAPI_COMP_ID with window.METADATA.id on
    every load and shouts on a mismatch.
 
-   The IRI path is /science/volume-liquid/01/. The metadata was first authored as "mass-liquid"
+   The IRI path is /ar/science/volume-liquid/01/. The metadata was first authored as "mass-liquid"
    and renamed before this unit was ever registered in Kata (6032a61) — "mass-liquid" must not
    reappear in any id.
 
    Lowercase everywhere (ids, folder names, storage keys): Kata derives a uniqueKey from the last
    id segment, and currentPartSlug() derives the state key from location.pathname — a capital
    letter would split one learner's progress across two documents. */
-var XAPI_ID_PREFIX = 'https://lomdot.education.gov.il/metodica/720active/science/volume-liquid/01/';
+var XAPI_ID_PREFIX = 'https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/';
 
-/* The unit id — a bare SLUG, not an IRI, equal to metadata/methodica-science-volume-liquid-01_unit.json
+/* The unit id — a bare SLUG, not an IRI, equal to metadata/methodica-ar-science-volume-liquid-01_unit.json
    `id` and to `learningUnitId` in every component JSON. MOE v2.5 §2.7 dropped the IRI requirement
    for the content unit only; components and items remain IRIs (hence XAPI_ID_PREFIX above).
    ⚠️ Never replace it with the prefix alone: Kata would take "01" as the uniqueKey and collide with
    every unit 01 of every subject. The issue-report form also posts shortId(learningUnitId) as the
    unit column of the sheet all 720 units share. */
-window.XAPI_UNIT_ID = 'methodica-science-volume-liquid-01';
+window.XAPI_UNIT_ID = 'methodica-ar-science-volume-liquid-01';
 
 /* The last segment of a canonical id — the short slug the issue-report form records. */
 function shortId(u) { return String(u || '').replace(/\/+$/, '').split('/').pop(); }

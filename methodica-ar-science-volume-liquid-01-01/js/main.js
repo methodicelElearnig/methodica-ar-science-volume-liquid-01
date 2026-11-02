@@ -18,7 +18,7 @@ const TOTAL_SCREENS = 16;  // S0–S15 — bump as screens are added (S11 = esca
    correctly has nowhere to go back to.
    This part is the unit's entry point, so it has no S0 back button and
    never pops — it only pushes itself on the way out. ───────────────── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const THIS_PART     = LOMDA_ID + '-01';
 
@@ -4120,10 +4120,10 @@ var SCREEN_TO_SUBCONTENT = {
   15: ['009', 1]    // SingleChoice warm-up — medicine for a baby
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-01';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-01';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '002': 1, '004': 1, '006': 1, '007': 1, '008': 1, '009': 1 };
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-01.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-01.json';
 var XAPI_END_BTN       = 's14q-check';   // S15 "שנמשיך?" — the part's last click (D-8)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════

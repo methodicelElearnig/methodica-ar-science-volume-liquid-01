@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   methodica-science-volume-liquid-01-07 — main.js
+   methodica-ar-science-volume-liquid-01-07 — main.js
    Part 07 of the liquid-volume lomda.
      S0  TransitionScreen (slide 41, last slide of the deck). Intro to
          THIS part's own peak question (שאלת השיא — 4 sections, 3+
@@ -44,7 +44,7 @@ const TOTAL_SCREENS = 6;  // S0-S5 — bump as more screens from the deck are im
    branch) — back lands on the previous part's LAST screen via the
    '#last' deep link, which cold-starts that screen.
    This part is terminal, so it only ever pops — it never pushes. ───── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const S0_BACK_ID    = 's0-back';
 
@@ -1157,10 +1157,10 @@ var SCREEN_TO_SUBCONTENT = {
   5: ['001', 5]     // section 4 — q4
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-07';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-07';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '001': 1 };
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-07.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-07.json';
 var XAPI_END_BTN       = 's5q-check';   // S5 "שנמשיך?" — the part's last click (D-8)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════

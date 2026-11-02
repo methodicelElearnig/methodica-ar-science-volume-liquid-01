@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   methodica-science-volume-liquid-01-02 — main.js
+   methodica-ar-science-volume-liquid-01-02 — main.js
    Part 02 of the liquid-volume lomda — the first standard practice
    series, split out of part 01 (was its S16–S21).
      S0  TransitionScreen (slide 22) — intro to the 5-question
@@ -37,7 +37,7 @@ const TOTAL_SCREENS = 6;  // S0–S5
    Screen-level resume is intentionally OUT OF SCOPE (owned by the resume
    branch) — back lands on the previous part's LAST screen via the
    '#last' deep link, which cold-starts that screen. ───────────────── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const THIS_PART     = LOMDA_ID + '-02';
 const S0_BACK_ID    = 's15-back';   // this part's S0 keeps part-01 id numbering
@@ -1324,10 +1324,10 @@ var SCREEN_TO_SUBCONTENT = {
   5: ['005', 1]     // SingleChoice — dog medicine dose
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-02';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-02';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '001': 1, '002': 1, '003': 1, '004': 1, '005': 1 };
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-02.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-02.json';
 var XAPI_END_BTN       = 's20q-check';   // S5 "שנמשיך?" — the part's last click (D-8)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════

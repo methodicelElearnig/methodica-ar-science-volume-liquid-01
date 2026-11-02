@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   methodica-science-volume-liquid-01-03 — main.js
+   methodica-ar-science-volume-liquid-01-03 — main.js
    Part 03 of the liquid-volume lomda. 6 screens so far:
      S0  TransitionScreen (companion video) — slide 28.
      S1  SingleChoiceQuestion, image-choice variant — slide 29 (Q1/3).
@@ -37,7 +37,7 @@ const TOTAL_SCREENS = 6;  // S0–S5 — bump as more slides from the deck are i
    Screen-level resume is intentionally OUT OF SCOPE (owned by the resume
    branch) — back lands on the previous part's LAST screen via the
    '#last' deep link, which cold-starts that screen. ───────────────── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const THIS_PART     = LOMDA_ID + '-03';
 const S0_BACK_ID    = 's0-back';
@@ -1498,10 +1498,10 @@ var SCREEN_TO_SUBCONTENT = {
   5: ['004', 1]     // SingleChoice, dual image — Adi and Almog (not in the component score)
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-03';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-03';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '001': 1, '002': 1, '003': 1, '004': 1 };
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-03.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-03.json';
 var XAPI_END_BTN       = 's5bq-check';   // pass-path last click (a failed gate ends on s3v-check)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════

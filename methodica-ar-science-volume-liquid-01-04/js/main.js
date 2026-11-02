@@ -1,7 +1,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════
-   methodica-science-volume-liquid-01-04 — main.js
+   methodica-ar-science-volume-liquid-01-04 — main.js
    Part 04 of the liquid-volume lomda. 3 screens:
      S0  TransitionScreen   (companion video; clone of part-01 s10)
      S1  TextScreen          (new template — "משימת כיתה" task list)
@@ -30,7 +30,7 @@ const TOTAL_SCREENS = 3;  // S0–S2
    Screen-level resume is intentionally OUT OF SCOPE (owned by the
    resume branch) — back lands on the previous part's LAST screen via
    the '#last' deep link, which cold-starts that screen. ───────────── */
-const LOMDA_ID      = 'methodica-science-volume-liquid-01';
+const LOMDA_ID      = 'methodica-ar-science-volume-liquid-01';
 const NAV_STACK_KEY = LOMDA_ID + '_navStack';
 const THIS_PART     = LOMDA_ID + '-04';
 const S0_BACK_ID    = 's0-back';
@@ -256,10 +256,10 @@ var SCREEN_TO_SUBCONTENT = {
   2: ['001', 2]     // the learner's free-text note (not a catalogued question)
 };
 
-var XAPI_COMP_SLUG     = 'methodica-science-volume-liquid-01-04';
+var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-04';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = {};              // no graded question in this part
-var XAPI_METADATA_FILE = '../metadata/methodica-science-volume-liquid-01-04.json';
+var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-04.json';
 var XAPI_END_BTN       = 's2-continue';   // S2 "אפשר להמשיך" — the part's last click (D-8)
 
 /* ═══════════════════ Resume (720) — the four per-part hooks ═══════════════════
