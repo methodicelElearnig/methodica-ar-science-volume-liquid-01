@@ -20,7 +20,7 @@ components join the Hebrew unit `methodica-science-volume-liquid-01` (`docs-and-
 parent-unit mode). `XAPI_UNIT_ID` / `learningUnitId` stay `methodica-ar-science-volume-liquid-01`. The
 character and nav-edge storage keys and the resume state keys (from the folder names) carry `ar`, so
 Hebrew and Arabic state never mix in one browser. Hosting (content, not ids):
-`https://lomdot.education.gov.il/metodica/720/ar/science/volume-liquid/01/` — to confirm with the deployment.
+`https://lomdot.education.gov.il/metodica/720/ar/science/volume-liquid/01/` (confirmed 2026-11-02).
 
 **Metadata** (supplied 2026-11-02, then aligned with Hebrew behaviour): question ids `…/<item>/qN`
 (the supplied `…/?q=qN` broke the item result after a reload, fix O-8); 01-007 q2 is `fill-in` with one

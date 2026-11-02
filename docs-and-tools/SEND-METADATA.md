@@ -6,7 +6,7 @@
 >   are created under it. `-ParentUnitKey ''` restores the own-unit upsert.
 > - `-Preflight` requires the parent unit to EXIST (exit 1 if not) and reports the components only.
 > - `ContentBaseUrl` = `https://lomdot.education.gov.il/metodica/720/ar/science/volume-liquid/01`
->   (Hebrew is served from `…/720/science/volume-liquid/01/`) — confirm before the first live send.
+>   (Hebrew is served from `…/720/science/volume-liquid/01/`) — confirmed 2026-11-02.
 > - Titles are sent under the ISO key `ar`.
 > - `retrieve-metadata.ps1` reads the parent unit by default, so its snapshot also holds the seven
 >   Hebrew components (warnings for them are expected).
