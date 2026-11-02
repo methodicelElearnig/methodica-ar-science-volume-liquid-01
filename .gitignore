@@ -1,0 +1,40 @@
+# Claude Code / editor local settings — never commit
+.claude/
+.vscode/
+.idea/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / temp files
+*.log
+*.tmp
+npm-debug.log*
+
+# Dependencies (this project has none, but keep the guard)
+node_modules/
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Unused / unreferenced local assets — not part of the shipped module
+methodica-ar-science-volume-liquid-01-03/assets/img/ורוד עם מדליה.png
+
+# The Kata API key — the one live credential allowed on disk (docs-and-tools/send-metadata.ps1
+# reads it from the repo root). Never commit it; the package allowlist keeps it out of deployments.
+kata-api-key.txt
+# Metadata-script run logs are kept only when named for a dated run.
+!docs-and-tools/send-metadata-*.log
+!docs-and-tools/retrieve-metadata-*.log
+!docs-and-tools/preflight-metadata-*.log
+!docs-and-tools/publish-metadata-*.log
+# Catalogue snapshot pulled down by retrieve-metadata.ps1 to diff against metadata/ — not a source of truth.
+metadata-from/
+# Snapshots from docs-and-tools/save-restore-state.html may contain a real learner's answers.
+docs-and-tools/states/*
+!docs-and-tools/states/.gitkeep
