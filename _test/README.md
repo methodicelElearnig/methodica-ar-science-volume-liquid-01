@@ -15,8 +15,8 @@ From the repo root, in PowerShell:
 
 ```powershell
 $env:NODE_PATH = "$env:TEMP\jstools\node_modules"
-node _test/verify-report.js      # 557 checks
-node _test/mutations.js          # 11 deliberate defects, each must make verify-report.js fail
+node _test/verify-report.js      # 562 checks
+node _test/mutations.js          # 12 deliberate defects, each must make verify-report.js fail
 ```
 
 Without jsdom/acorn the static sections still run and the rest is reported as skipped.

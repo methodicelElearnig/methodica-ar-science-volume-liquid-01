@@ -185,6 +185,8 @@ ok('D-1', 'part 05: no widget_referrer', !/widget_referrer/.test(p05));
 ok('D-1', 'part 05: YT.Player attaches to our own iframe (ytMountIframe), no videoId/host/playerVars', /ytMountIframe\(/.test(p05) && !/new YT\.Player\('/.test(p05) && !/videoId\s*:/.test(p05) && !/playerVars/.test(p05));
 ok('D-1', 'part 05: the embed origin comes from location.origin, never href', /location\.origin/.test(p05) && !/src\s*=.*location\.href/.test(p05));
 /* MOE 2026-10-08: the challenge (05) reports its real score; success only at >= 60% of the 2 declared questions. */
+ok('01', '007 is scored over the questions of the path taken (XAPI_ITEM_RESULT[\'007\'])',
+  /var XAPI_ITEM_RESULT = \{\s*'007': function/.test(stripComments(src['01'])));
 ok('05', 'challenge: goToNextPart sends success = correct/2 >= 0.6 with the real scaled score',
   /var _s = xapiCorrectCount\(\) \/ 2;\s*xapiEndComponent\(\{ success: _s >= 0\.6, score: \{ scaled: _s \} \}/.test(p05) && !/success: true/.test(/function goToNextPart\(\) \{[\s\S]*?\n\}/.exec(p05)[0]));
 ok('character', 'UI_CHARACTER_KEY is namespaced to this unit', /UI_CHARACTER_KEY = 'methodica_ar_science_volume_liquid_01_selectedCharacter'/.test(unitJs['40-resume.js']));
@@ -386,6 +388,18 @@ async function runtime() {
   o = await o8('02', [['q1', true]], [['q2', false]], '002');
   ok('02', 'O-8: a two-question item answered across a reload reports both (success false, 0.5)',
     o.length === 1 && o[0].result && o[0].result.success === false && o[0].result.score.scaled === 0.5, JSON.stringify(o.map(s => s.result)));
+  /* 01-007 spans the two learning paths: q1 (S8 hotspot) only on the scratch-card path, q2 on both.
+     It is scored over the questions offered (live test 2026-11-02: the escape path got 0.5, false). */
+  const res = r => JSON.stringify(r.map(s => s.result));
+  const is = (r, succ, sc) => r.length === 1 && r[0].result && r[0].result.success === succ && r[0].result.score.scaled === sc;
+  o = await o8('01', [], [['q2', true]], '007');
+  ok('01', '007: escape path (q2 only), correct -> success true, 1', is(o, true, 1), res(o));
+  o = await o8('01', [['q2', false]], [['q2', true]], '007');
+  ok('01', '007: escape path, wrong before the reload then right -> success true, 1', is(o, true, 1), res(o));
+  o = await o8('01', [['q1', true]], [['q2', true]], '007');
+  ok('01', '007: scratch path, q1 and q2 right across a reload -> success true, 1', is(o, true, 1), res(o));
+  o = await o8('01', [['q1', false]], [['q2', true]], '007');
+  ok('01', '007: scratch path, q1 wrong -> success false, 0.5 (as before)', is(o, false, 0.5), res(o));
   /* (e) MOE 2026-10-08: the challenge (05) reports its real score; success only at >= 60% of the
      2 declared questions (001 q1, 002 q1). No gate: the learner continues either way. */
   const ch = await boot('05', '?xapiLib=../_test/xapi-720-k.js&registration=thr-05-' + Math.random().toString(36).slice(2) + '&resetState');

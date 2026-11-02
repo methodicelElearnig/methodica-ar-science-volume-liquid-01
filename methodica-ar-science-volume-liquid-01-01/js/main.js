@@ -4123,6 +4123,20 @@ var SCREEN_TO_SUBCONTENT = {
 var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-01';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '002': 1, '004': 1, '006': 1, '007': 1, '008': 1, '009': 1 };
+/* 01-007 spans the two learning paths: q1 (S8 hotspot) exists only on the scratch-card path, q2 on
+   both (S10 / S12). The O-8 default scores an item over every declared question, so the escape path
+   could never pass 007 (live test 2026-11-02: 0.5, false). Score 007 over the questions the learner
+   was offered: q2 always, q1 only if it was answered. Rebuilt from XAPI_Q_RESULTS, so it survives a
+   reload like the default. Nothing answered -> null, as the default. */
+var XAPI_ITEM_RESULT = {
+  '007': function () {
+    var has = function (q) { return Object.prototype.hasOwnProperty.call(XAPI_Q_RESULTS, '007/' + q); };
+    if (!has('q1') && !has('q2')) return null;
+    var qs = has('q1') ? ['q1', 'q2'] : ['q2'];
+    var ok = qs.filter(function (q) { return XAPI_Q_RESULTS['007/' + q] === true; }).length;
+    return { success: ok === qs.length, score: { scaled: ok / qs.length } };
+  }
+};
 var XAPI_METADATA_FILE = '../metadata/methodica-ar-science-volume-liquid-01-01.json';
 var XAPI_END_BTN       = 's14q-check';   // S15 "שנמשיך?" — the part's last click (D-8)
 

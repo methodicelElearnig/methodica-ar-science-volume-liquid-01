@@ -47,8 +47,16 @@ Every statement returned **200** and every state save **204**; the only non-2xx 
    shown was answered correctly. Item 007 declares q1 (hotspot, scratch-card path only) and q2 (both
    paths); since O-8 (`4f7a639`) an item's result counts every declared question, so the escape path can
    never pass 007. **Same code in Hebrew** — the Hebrew unit does the same. The component result is not
-   affected (01 reports success, no score). Natural fix: the learning-path item split (Phase 2), or an
-   `XAPI_ITEM_RESULT['007']` that counts only the questions of the path taken — in Hebrew and Arabic together.
+   affected (01 reports success, no score).
+   **Fixed in the Arabic repo the same day** (not yet deployed): part 01 defines `XAPI_ITEM_RESULT['007']`,
+   which scores 007 over q2 plus q1 only if q1 was answered (i.e. offered); rebuilt from `XAPI_Q_RESULTS`, so
+   it survives a reload. `-01 main.js?v=` 13 → 14. Four runtime checks (escape path with and without a
+   reload, scratch path right and wrong; the two escape cases fail on the old code), a static check and a
+   mutation; verified in the browser with the local stand-in library (escape path → 007 true, 1).
+   **Hebrew: same bug, same fix pending approval.**
+
+Findings 2–4 are known and left as they are (decided 2026-11-02):
+
 2. **Invisible direction marks in responses.** Options such as `15‏‎ ‎ملل` (05-001) and `240‏‎ ‎ملل`
    (06 q1) carry RLM/LRM from the translation, so `result.response` differs from the metadata string
    (`15 ملل`) by invisible characters. Arabic only.

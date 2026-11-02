@@ -23,6 +23,7 @@ const MUTATIONS = [
   { name: 'O-8: items fall back to the library aggregate again', file: 'unit-js/20-xapi.js', from: '  return _xapiIsEval(item) ? _xapiDefaultItemResult(item) : null;', to: '  return null;', expect: 'O-8' },
   { name: 'Hebrew text comes back on screen', file: M5, from: "'فيديو: ملعقة تنقذ الأرواح'", to: "'סרטון: כפית שמצילה חיים'", expect: 'no Hebrew outside comments' },
   { name: 'a question id in the ?q= shape', file: 'metadata/methodica-ar-science-volume-liquid-01-02.json', from: '-002/q2"', to: '-002/?q=q2"', expect: 'questionId is <item id>qN' },
+  { name: '007 falls back to the default (escape path fails again)', file: 'methodica-ar-science-volume-liquid-01-01/js/main.js', from: "var XAPI_ITEM_RESULT = {\n  '007': function", to: "var XAPI_ITEM_RESULT_OFF = {\n  '007': function", expect: '007: escape path (q2 only), correct' },
   { name: 'the old character key comes back', file: 'unit-js/00-util.js', from: "  let c = null;", to: "  let c = localStorage.getItem('lomda_selectedCharacter');", expect: "'lomda_selectedCharacter' is not read" }
 ];
 

@@ -152,11 +152,11 @@ not by registration). Then `__stmts()`, `__state()`, `__dupes()` in the console.
 node _test/verify-report.js
 ```
 
-557 checks: catalogue identity vs `metadata/`, screen maps, layer wiring and
+562 checks: catalogue identity vs `metadata/`, screen maps, layer wiring and
 `?v=` parity, routing behind `DEV_NAV`, the YouTube canary, resume hooks and
 flush placement, the asset contract (exact case), and a jsdom run of every
 part with the stub, plus section 8 for the Arabic build (`lang="ar"`, no Hebrew outside comments,
-no Hebrew-unit slug or key). `node _test/mutations.js` proves 11 deliberate defects are
+no Hebrew-unit slug or key). `node _test/mutations.js` proves 12 deliberate defects are
 caught. A real Kata run is not covered by anything local.
 
 ## Packaging and metadata
@@ -184,6 +184,17 @@ Every part reads it through `getCharacter()` (`unit-js/00-util.js`).
   next save overwrites it).
 - The 720 library logs the launch URL, `slxapi` included, to the console.
 - The local stub keeps state across registrations — use `?resetState`.
+- Left as they are (live test 2026-11-02, `docs-and-tools/LIVE-VERIFICATION-2026-11-02.md`): some Arabic
+  options carry invisible RLM/LRM marks, so their `result.response` differs from the metadata string by
+  those characters (05-001 `15 ملل`, 06 q1 `240 ملل`); the part-05 video's YouTube title is
+  "قياس كتلة السوائل" (content to confirm); 02-001 reports the hotspot letter only, as Hebrew does.
+
+## 01-007 across the two learning paths
+
+Item 007 declares q1 (S8 hotspot, scratch-card path only) and q2 (S10 / S12, both paths). The O-8
+default scores an item over every declared question, so the escape-room path completed 007 as
+`false, 0.5`. Part 01 now defines `XAPI_ITEM_RESULT['007']`: q2 always, q1 only if answered (2026-11-02).
+The Hebrew unit has the same bug; its fix waits for approval.
 
 ## YouTube embed (part 05, S3) — built so it cannot leak the launch URL
 
