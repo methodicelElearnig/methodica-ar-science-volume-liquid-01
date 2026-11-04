@@ -362,7 +362,10 @@
   border: none; padding: 0;
   cursor: pointer; outline: none;
   position: relative;
-  perspective: 900px;
+  /* Arabic build: no perspective. With it, a flipped card's back face is a 3D-composited layer that gets
+     rasterized below the app's scale-up (#app is scaled by the viewport), so all text on it, including the
+     term tooltip, looked soft. Without it the flip is a flat squash and the text stays sharp. */
+  perspective: none;
 }
 
 /* Rotating inner wrapper */
@@ -1330,6 +1333,10 @@
 #s9 .select-content.s7sc-content { gap: 26px; }
 #s9 .select-subtitle.frc-instructions {
   font-size: 24px; font-weight: 400; line-height: 1.4;
+  /* Arabic build: the Arabic line is wider than the Hebrew one, so its left end ran under the peeking
+     character's speech bubble (bubble right edge x=293). Left padding shifts the centered text right
+     by half of it, clearing the bubble. */
+  padding-left: 40px;
 }
 #s9-back {
   position: absolute;
@@ -2072,3 +2079,9 @@
 /* Single-child header now -- drop the LTR flip that ordered title vs. X. */
 #s3ddq-popup .scq-popup-header, #s10q-popup .scq-popup-header,
 #s12q-popup .scq-popup-header, #s12ddq-popup .scq-popup-header { direction: rtl; }
+
+/* Arabic build: S3 hint popup. The second hint sentence is longer in Arabic and wrapped to a 4th line at the
+   shared 462px content width; ~510px of text is needed, so this popup alone is widened to keep the hint at
+   three lines (one per sentence). Other hint popups keep the shared size from scq.css. */
+#s3ddq-hint-overlay .scq-hint-popup   { width: 640px; }
+#s3ddq-hint-overlay .scq-hint-content { width: 560px; }

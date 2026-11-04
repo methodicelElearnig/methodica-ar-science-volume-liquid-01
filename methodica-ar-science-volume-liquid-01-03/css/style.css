@@ -530,6 +530,10 @@
   text-align: right; direction: rtl; margin: 0;
 }
 .s5bq-img { width: 300px; height: 210px; }
+/* Arabic build: the board images carry the Arabic header "القياس 1" in the top-right corner, exactly where
+   the shared zoom button sits (top:10px; right:10px), so the button hid it. Pin it to the bottom-right,
+   which is empty board surface. */
+.s5bq-img .img-zoom-btn { top: auto; bottom: 10px; }
 
 .s5bq-textcol {
   flex: 1; min-width: 0;

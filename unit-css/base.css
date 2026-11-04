@@ -101,6 +101,13 @@ html, body {
   font-weight: 600; font-size: 18px; color: var(--subject-500);
   text-align: center; width: 80px; line-height: normal;
   direction: rtl; display: none;
+  /* Arabic build: "هل وجدتم مشكلة؟" is longer than the Hebrew label and wrapped to two lines under the flag,
+     landing on top of screen content (e.g. the speech bubble on unit 01 S9). Show it beside the flag, on
+     one line, on its own white background so it stays legible over anything it touches. */
+  position: absolute; top: 19px; left: calc(50% + 27px);
+  transform: translateY(-50%);
+  width: auto; white-space: nowrap;
+  padding: 2px 8px; border-radius: 8px; background: #fff;
 }
 .flag-btn:hover .flag-btn-label,
 .flag-btn:focus-visible .flag-btn-label { display: block; }

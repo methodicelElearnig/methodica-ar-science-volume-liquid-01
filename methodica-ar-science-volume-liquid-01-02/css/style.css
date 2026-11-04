@@ -638,6 +638,11 @@
   font-size: 24px; font-weight: 400; color: #303030;
   line-height: normal; margin: 0;
 }
+/* Arabic build: the option letters أ ب ت are the key to the dots on the photo, so they stand out from the
+   option text: bold, subject blue, slightly larger. */
+.s16q-opt-letter {
+  font-weight: 700; font-size: 28px; color: var(--subject-700);
+}
 
 /* Photo frame — 630×341 (slide geometry; source photo is top-cropped
    18.8% in the slide → bottom-anchored cover shows the same region) */
@@ -679,7 +684,7 @@
   transition: width 0.15s ease, height 0.15s ease;
   display: flex; align-items: center; justify-content: center;
   font-family: Calibri, Arial, sans-serif;
-  font-size: 18px; font-weight: 700; color: #303030;
+  font-size: 21px; font-weight: 700; color: #000;
   line-height: 1;
 }
 .s16q-hotspot-dot::before,

@@ -388,7 +388,7 @@ function loadYouTubeApi(cb) {
    The other parameters are the playerVars this player always used. */
 function ytEmbedSrc(videoId) {
   const p = ['enablejsapi=1', 'rel=0', 'modestbranding=1', 'playsinline=1',
-             'hl=iw', 'cc_lang_pref=iw', 'cc_load_policy=1'];
+             'hl=ar', 'cc_lang_pref=ar', 'cc_load_policy=1'];
   if (/^https?:$/.test(window.location.protocol)) {
     p.push('origin=' + encodeURIComponent(window.location.origin));
   }
