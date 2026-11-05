@@ -50,8 +50,8 @@ const CHARACTER_VIDEOS = {
   'character-2': 'assets/video/Character-2-Bag.mp4'
 };
 const CHARACTER_IMAGES = {
-  'character-1': 'assets/img/character-1-happy.PNG',
-  'character-2': 'assets/img/character-2-happy.png'
+  'character-1': 'assets/img/character-1-happy-opt.png',
+  'character-2': 'assets/img/character-2-happy-opt.png'
 };
 /* ─── State ─────────────────────────────────────────────── */
 let currentScreen = 0;

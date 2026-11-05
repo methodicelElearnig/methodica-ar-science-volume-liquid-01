@@ -56,7 +56,7 @@ const S1_CHARACTER_VIDEOS = {
    so it stays correct even when a card's src is swapped later (S6 character
    switch) — not just for the element's first source. */
 const CARD_VIDEO_SAFE_END_TIME = {
-  'assets/video/character-2-selection.mp4':  3.8,  // content through 3.86s, blank from 3.88s
+  'assets/video/character-2-selection-opt.mp4':  3.8,  // content through 3.86s, blank from 3.88s
   'assets/video/character-1-scratch-card.mp4': 3.8,  // content through 3.85s, blank from 3.9s
   'assets/video/character-2-scratch-card.mp4': 3.75  // content through 3.8s, blank from 3.85s
   // character-1/2-looking-glass.mp4: verified clean to their true end — no entry needed.
@@ -418,7 +418,7 @@ function resetScreenState(n) {
     const ropeImg = document.getElementById('s5-rope-char');
     if (ropeImg) {
       const char = window.lomdaState.selectedCharacter || 'character-1';
-      ropeImg.src = 'assets/img/' + char + '-rope.png';
+      ropeImg.src = 'assets/img/' + char + '-rope-opt.png';
     }
   }
   if (n === 6) {
@@ -438,7 +438,7 @@ function resetScreenState(n) {
     const peekImg = document.getElementById('s9-peek-char');
     if (peekImg) {
       const char = window.lomdaState.selectedCharacter || 'character-1';
-      peekImg.src = 'assets/img/' + char + '-peeking.png';
+      peekImg.src = 'assets/img/' + char + '-peeking-opt.png';
     }
   }
   if (n === 10) {
@@ -692,7 +692,7 @@ const SCQ_POPUP_CFG = {
       'لكي نعرف كمية السائل الموجودة فعلًا، علينا قياسها بأداة قياس خاصة وبطريقة منظمة‎.',
       'تعالوا نتعلم كيف نقوم بذلك‎.'
     ],
-    img: 'assets/img/DrinksAndMeasure.png'
+    img: 'assets/img/DrinksAndMeasure-opt.png'
   },
   wrong2: {
     bg: '#ffdbdc',
@@ -702,7 +702,7 @@ const SCQ_POPUP_CFG = {
       'لكي نعرف كمية السائل الموجودة فعلًا، علينا قياسها بأداة قياس خاصة وبطريقة منظمة‎.',
       'تعالوا نتعلم كيف نقوم بذلك‎.'
     ],
-    img: 'assets/img/DrinksAndMeasure.png'
+    img: 'assets/img/DrinksAndMeasure-opt.png'
   }
 };
 
