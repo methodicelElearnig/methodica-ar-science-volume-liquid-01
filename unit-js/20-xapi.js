@@ -45,6 +45,9 @@ function xapiAnswerText(el) {
      dropdown check/wrong marks are text-less SVGs and need no entry. */
   var drop = c.querySelectorAll('.img-zoom-btn, .help-popup, [class*="tooltip"], [class*="info-bubble"], [class*="info-chip"]');
   for (var i = 0; i < drop.length; i++) { drop[i].remove(); }
+  /* a <br> in a label is a space in the metadata text (06-001 q4: 'של 5 מ"ל:<br>מודדים') */
+  var brs = c.querySelectorAll('br');
+  for (var j = 0; j < brs.length; j++) { brs[j].replaceWith(' '); }
   return c.textContent.replace(/\s+/g, ' ').trim();
 }
 
@@ -226,44 +229,201 @@ function xapiFinishItems() {
    זו אינווריאנטה מ-REPORT-XAPI.md §2: כשל דיווח לא יכול לקלקל את הניקוד.
    כאן היא נאכפת במקום אחד במקום להסתמך על 26 אתרי קריאה שיזכרו אותה. */
 
-/* ── שני בוני טקסט-תשובה, לסוגי השאלות שאינם בחירה בודדת ──
-   result.response אמור לשאת את מה שהלומד באמת ענה. בבחירה בודדת זה
-   xapiAnswerText(optEl); בשאלות גרירה ובשאלות שדות צריך לתאר מצב, ולא
-   אלמנט אחד. שניהם גנריים במכוון — אותה תבנית markup חוזרת בסינים
-   01, 02, 04, 05 ו-06. */
+/* ═══════════════════ result.response — per the xAPI interaction-type formats ═══════════════════
+   methodica-science-body-matter-01 (2026-10-19), first unit with this layer. MOE (mail 19.10.26,
+   Documentation/MOE/דיוק ביישום תקן XAPI.docx) found that the family's `response` strings did not
+   match the metadata ("s18-input-1=34 | s18-input-2=34", "1:2:3", "12 | 23" — DOM ids and ad-hoc
+   joins) and asked for xAPI-Data.md §4.1.6.1 / Appendix C formats. Kata's QuestionType enum IS the
+   xAPI interactionType vocabulary and Kata compares `response` to the metadata's answers /
+   correctAnswers, so:
 
-/* לוח גרירה: לכל אזור, הפריטים שהלומד הניח בו.
-   'ton: קטר | kg: צב ענק | gram: תפוח, גרגר מלח' */
-function xapiZoneAnswer(prefix, zoneIds) {
+     • the METADATA TEXT is the identifier. Every builder resolves what the UI hands it to the
+       metadata entry (normalised comparison) and emits the metadata string byte-for-byte, in
+       metadata order, with the xAPI delimiters. Never a DOM id, never click order.
+     • choice      → 'A' or 'A[,]B'           pieces from answers[], in answers order
+       matching    → 'S1[.]T1[,]S2[.]T2'       one pair per answers.source, in source order ('S[.]' if unplaced)
+       performance → 'step1[.]v1[,]step2[.]v2' one per steps[], in steps order (learner text)
+       fill-in / numeric / true-false / sequencing / other → plain / '12.5' / 'true' / 'A[,]B' / free text
+     • '[,]' '[.]' '[:]' are reserved: metadata strings must never contain them (the harness checks);
+       learner-typed free text has them blanked; metadata-sourced pieces are never altered.
+     • lookup normalisation only: NFC, collapsed whitespace, ׳ ’ ʼ → ' . An unresolvable UI text is
+       warned about and emitted normalised — the statement still carries information, and
+       _test/verify-report.js turns the warning into a failure.
+
+   The library (xapi-720-k.js, answered block) passes sttmResult.response through verbatim, so the
+   whole layer is unit-side. object.definition stays {id}-only (MOE examples, v2.7 p.22; the library
+   drops it); if MOE ever asks for interactionType/correctResponsesPattern, the same builders
+   produce the pattern string from correctAnswers. The retired xapiZoneAnswer / xapiFieldsAnswer /
+   xapiMultiAnswer (the 'id=value | …' producers) must not come back — the harness greps for them. */
+
+/* The metadata question object for (item suffix, qKey) — or null. Same matching as xapiQ. */
+function _xapiFindQuestion(suffix, qKey) {
   try {
-    return zoneIds.map(function (z) {
-      var el = document.getElementById(prefix + '-zone-' + z);
-      var items = el ? el.querySelectorAll('[class*="drag-item"], [class*="placed-card"]') : [];
-      var names = [];
-      for (var i = 0; i < items.length; i++) names.push(xapiAnswerText(items[i]));
-      return z + ': ' + (names.join(', ') || '—');
-    }).join(' | ');
-  } catch (e) { return ''; }
+    var sc = (window.METADATA && window.METADATA.subContent) || [];
+    for (var i = 0; i < sc.length; i++) {
+      if (_xapiTrim(sc[i].id).slice(-(suffix.length + 1)) !== '-' + suffix) continue;
+      var qs = sc[i].questions || [];
+      for (var j = 0; j < qs.length; j++) {
+        var v = _xapiTrim(qs[j].questionId);
+        if (v === qKey || v.slice(-(qKey.length + 1)) === '/' + qKey) return qs[j];
+      }
+      var n = parseInt(String(qKey).replace(/\D/g, ''), 10);
+      return (n >= 1 && n <= qs.length) ? qs[n - 1] : null;
+    }
+  } catch (e) {}
+  return null;
 }
 
-/* קבוצת שדות או נפתחים. values אופציונלי — בלעדיו נקרא .value מה-DOM.
-   's18-input-1=1400 | s18-input-2=900' */
-function xapiFieldsAnswer(ids, values) {
-  try {
-    return ids.map(function (id) {
-      var v = values ? values[id] : (document.getElementById(id) || {}).value;
-      return id + '=' + (v == null || v === '' ? '—' : v);
-    }).join(' | ');
-  } catch (e) { return ''; }
+/* performance steps as [{name, correctAnswer}]. Two metadata shapes: an explicit steps[], or the
+   Kata shape (2026-10-21, 03-004/q1 as Kata stores it): answers null, correctAnswers
+   [{stepId, response}] — the stepId is the step name, in correctAnswers order. */
+function _xapiSteps(q) {
+  if (q.steps) return q.steps;
+  var ca = q.correctAnswers || [];
+  if (!ca.length || !ca.every(function (c) { return c && c.stepId != null; })) return null;
+  return ca.map(function (c) { return { name: c.stepId, correctAnswer: c.response }; });
 }
 
-/* בחירה מרובה: התוויות של האפשרויות שנבחרו, דרך פונקציית האיתור של המסך. */
-function xapiMultiAnswer(ids, optElFn) {
+/* {questionId, parentId, questionType, answers, correctAnswers, steps} — one lookup. */
+function xapiQMeta(suffix, qKey) {
+  var ids = xapiQ(suffix, qKey), q = _xapiFindQuestion(suffix, qKey) || {};
+  return { questionId: ids.questionId, parentId: ids.parentId,
+           questionType: q.questionType || null,
+           answers: q.answers == null ? null : q.answers,
+           correctAnswers: q.correctAnswers || null,
+           steps: _xapiSteps(q) };
+}
+
+var XAPI_SEP_LIST = '[,]', XAPI_SEP_PAIR = '[.]';
+var _XAPI_DELIMS = /\[,\]|\[\.\]|\[:\]/g;
+
+/* Bidi marks (LRM / RLM / embeddings / isolates) are invisible layout hints: the Arabic labels carry
+   them around numbers ("15‏‎ ‎ملل"), the metadata does not (2026-11-05). Lookup only — what is
+   emitted is always the metadata string. ׳ = Hebrew geresh, escaped so the source stays
+   Hebrew-free for the Arabic build check. */
+var _XAPI_BIDI = /[‎‏‪-‮⁦-⁩]/g;
+function _xapiNorm(s) {
+  s = String(s == null ? '' : s);
+  if (s.normalize) s = s.normalize('NFC');
+  return s.replace(_XAPI_BIDI, '').replace(/[\u05F3’ʼ]/g, "'").replace(/\s+/g, ' ').trim();
+}
+/* learner-typed text: the delimiters cannot be escaped in xAPI, so they are blanked */
+function _xapiFree(s) { return _xapiNorm(s).replace(_XAPI_DELIMS, ' ').replace(/\s+/g, ' ').trim(); }
+
+/* Resolve one UI value to the metadata entry it names. pool = array of metadata strings.
+   value: a string (matched by _xapiNorm) or a number (index into the pool).
+   Returns {text, idx} — text is the METADATA string, byte for byte, when found. */
+function _xapiPick(value, pool, item, qKey, where) {
+  pool = pool || [];
+  if (typeof value === 'number') {
+    if (pool[value] != null) return { text: String(pool[value]), idx: value };
+    console.warn('[xAPI] response: index ' + value + ' outside metadata ' + where, item, qKey);
+    return { text: '', idx: 1e9 };
+  }
+  var n = _xapiNorm(value);
+  for (var i = 0; i < pool.length; i++) if (_xapiNorm(pool[i]) === n) return { text: String(pool[i]), idx: i };
+  if (n !== '') console.warn('[xAPI] response: "' + n + '" not in metadata ' + where, item, qKey);
+  return { text: n, idx: 1e9 };
+}
+
+/* choice: selected → [text | index]; emitted in answers order, whatever the click order */
+function xapiChoiceResponse(item, qKey, selected) {
+  var m = xapiQMeta(item, qKey), pool = Array.isArray(m.answers) ? m.answers : [];
+  var picks = (selected || []).map(function (v) { return _xapiPick(v, pool, item, qKey, 'answers'); });
+  picks.sort(function (a, b) { return a.idx - b.idx; });
+  var texts = picks.map(function (p) { return p.text; }).filter(function (t) { return t !== ''; });
+  return { response: texts.join(XAPI_SEP_LIST), readable: texts.join(', ') };
+}
+
+/* matching: pairs → [{source, target}] (strings or indexes). One pair per answers.source, in
+   answers.source order; a source the learner left unmatched → 'S[.]'. */
+function xapiMatchingResponse(item, qKey, pairs) {
+  var m = xapiQMeta(item, qKey);
+  var src = (m.answers && m.answers.source) || [], tgt = (m.answers && m.answers.target) || [];
+  var bySource = {};
+  (pairs || []).forEach(function (p) {
+    var s = _xapiPick(p.source, src, item, qKey, 'answers.source');
+    var t = _xapiPick(p.target, tgt, item, qKey, 'answers.target');
+    /* direction guard: the call site handed us the pair target-first */
+    if (s.idx === 1e9 && t.idx === 1e9) {
+      var s2 = _xapiPick(p.target, src, item, qKey, 'answers.source'), t2 = _xapiPick(p.source, tgt, item, qKey, 'answers.target');
+      if (s2.idx !== 1e9 && t2.idx !== 1e9) { console.warn('[xAPI] matching pair reversed — swapped', item, qKey); s = s2; t = t2; }
+    }
+    bySource[s.text] = t.text;
+  });
+  var out = [], readable = [];
+  for (var i = 0; i < src.length; i++) {
+    var s0 = String(src[i]), t0 = bySource[s0] == null ? '' : bySource[s0];
+    out.push(s0 + XAPI_SEP_PAIR + t0); readable.push(s0 + ' → ' + (t0 || '—'));
+  }
+  /* pairs whose source is not in the metadata are appended, so nothing the learner did is lost */
+  Object.keys(bySource).forEach(function (s) { if (src.indexOf(s) < 0 && s !== '') out.push(s + XAPI_SEP_PAIR + bySource[s]); });
+  return { response: out.join(XAPI_SEP_LIST), readable: readable.join(' | ') };
+}
+
+/* performance: values → { <step name>: text } or [text, …] in steps order */
+function xapiPerformanceResponse(item, qKey, values) {
+  var m = xapiQMeta(item, qKey), steps = m.steps || [];
+  if (!steps.length) console.warn('[xAPI] performance: no steps[] / correctAnswers[].stepId in metadata', item, qKey);
+  var out = [], readable = [];
+  steps.forEach(function (st, i) {
+    var name = String(st.name == null ? i + 1 : st.name);
+    var v = values == null ? '' : (Array.isArray(values) ? values[i] : (values[name] != null ? values[name] : values[i]));
+    out.push(name + XAPI_SEP_PAIR + _xapiFree(v)); readable.push(name + ': ' + (_xapiFree(v) || '—'));
+  });
+  return { response: out.join(XAPI_SEP_LIST), readable: readable.join(' | ') };
+}
+
+function xapiFillInResponse(item, qKey, values) {
+  var vs = (Array.isArray(values) ? values : [values]).map(_xapiFree);
+  return { response: vs.join(XAPI_SEP_LIST), readable: vs.join(' | ') };
+}
+function xapiNumericResponse(item, qKey, value) {
+  var n = Number(String(value == null ? '' : value).replace(',', '.'));
+  var s = isNaN(n) ? _xapiFree(value) : String(n);
+  return { response: s, readable: s };
+}
+function xapiTrueFalseResponse(item, qKey, value) {
+  var s = (value === true || value === 'true') ? 'true' : 'false';
+  return { response: s, readable: s };
+}
+function xapiSequencingResponse(item, qKey, ordered) {
+  var m = xapiQMeta(item, qKey), pool = Array.isArray(m.answers) ? m.answers : [];
+  var texts = (ordered || []).map(function (v) { return _xapiPick(v, pool, item, qKey, 'answers').text; });
+  return { response: texts.join(XAPI_SEP_LIST), readable: texts.join(' > ') };
+}
+function xapiOtherResponse(item, qKey, text) {
+  var s = _xapiFree(text);
+  return { response: s, readable: s };
+}
+function _xapiNoShape(item, qKey, want) {
+  console.warn('[xAPI] response: metadata type needs "' + want + '" but the call site passed none', item, qKey);
+  return [];
+}
+
+/* Dispatcher. spec = string | { type?, choices | pairs | steps | values | value | order | text }.
+   The METADATA type governs (Kata reads the metadata); spec.type is only a cross-check. */
+function xapiResponse(item, qKey, spec) {
+  var m = xapiQMeta(item, qKey), type = m.questionType;
+  if (typeof spec === 'string' || spec == null) spec = { text: spec == null ? '' : spec };
+  if (spec.type && type && spec.type !== type)
+    console.warn('[xAPI] response: call site says "' + spec.type + '", metadata says "' + type + '"', item, qKey);
+  if (!type) { type = spec.type || 'other'; console.warn('[xAPI] response: no questionType in metadata, using "' + type + '"', item, qKey); }
   try {
-    return (ids || []).map(function (id) {
-      return xapiAnswerText(optElFn(id)) || String(id);
-    }).join(', ');
-  } catch (e) { return ''; }
+    switch (type) {
+      case 'choice':      return xapiChoiceResponse(item, qKey, spec.choices != null ? spec.choices : [spec.text]);
+      case 'matching':    return xapiMatchingResponse(item, qKey, spec.pairs || _xapiNoShape(item, qKey, 'pairs'));
+      case 'performance': return xapiPerformanceResponse(item, qKey, spec.steps != null ? spec.steps : spec.values);
+      case 'fill-in':     return xapiFillInResponse(item, qKey, spec.values != null ? spec.values : spec.text);
+      case 'numeric':     return xapiNumericResponse(item, qKey, spec.value != null ? spec.value : spec.text);
+      case 'true-false':  return xapiTrueFalseResponse(item, qKey, spec.value != null ? spec.value : spec.text);
+      case 'sequencing':  return xapiSequencingResponse(item, qKey, spec.order || spec.choices);
+      default:            return xapiOtherResponse(item, qKey, spec.text != null ? spec.text : JSON.stringify(spec));
+    }
+  } catch (e) {
+    console.error('[xAPI] response formatting failed', item, qKey, e);
+    return { response: _xapiFree(spec.text), readable: _xapiFree(spec.text) };
+  }
 }
 
 /* דיווח תשובה מדורגת אחת.
@@ -272,15 +432,18 @@ function xapiMultiAnswer(ids, optElFn) {
      correct   האם התשובה נכונה
      isLast    האם זו התשובה האחרונה על השאלה (נכונה, או שנגמרו הניסיונות).
                רק 'answered.last' נכנס למכנה של ניקוד הרכיב.
-     answer    טקסט התשובה של הלומד, כפי שהוא רואה אותה */
+     answer    spec object for xapiResponse ({choices} | {pairs} | {steps} | {text} …), or a plain
+               string for a single-value type. Same signature as every live unit. */
 function xapiAnswered(item, qKey, correct, isLast, answer) {
   XAPI_Q_RESULTS[item + '/' + qKey] = !!correct;
   if (!window.XAPI_USING_G || typeof sendStatement720 !== 'function') return;
   try {
+    var r = xapiResponse(item, qKey, answer);
     sendStatement720(isLast ? 'answered.last' : 'answered', 'question',
       { success: !!correct,
         score: { scaled: correct ? 1 : 0 },
-        extensions: { student_answer: [answer == null ? '' : String(answer)] } },
+        response: r.response,
+        extensions: { student_answer: [r.readable] } },   /* fallback for library letters < k */
       xapiQ(item, qKey));
   } catch (e) { console.error('[xAPI] answered ' + item + '/' + qKey, e); }
 }
@@ -338,6 +501,21 @@ function xapiRequestedHint(item, qKey) {
     sendStatement720('requested.1', 'question', null, xapiQ(item, qKey));
     XAPI_HINTS_SENT[_k] = true;
   } catch (e) { console.error('[xAPI] requested ' + _k, e); }
+}
+
+/* The learning-path choice — MOE v2.7 'selected', category learning-type (methodica-science-mass-weight-01
+   8498b4d, rule of 04.11.26; MOE monday 05.11.26: "selected was never sent" in part 01 item 007).
+   object = the component; result.response = the mediaFormat of the chosen path's item, from the part's
+   XAPI_LEARNING_PATHS. Sent on every confirmed choice and every path switch (no ledger: the platform
+   needs the path the learner ended on). Silent while a painter runs, and behind the XAPI_USING_G
+   guard. Guide: ADDING-REPORTING-AND-RESUME.md §6.3a. */
+function xapiSelectedLearningType(path) {
+  var p = (typeof XAPI_LEARNING_PATHS !== 'undefined') && XAPI_LEARNING_PATHS[path];
+  if (!p || (typeof resumeIsPainting === 'function' && resumeIsPainting())) return;
+  if (!window.XAPI_USING_G || typeof sendStatement720 !== 'function') return;
+  try {
+    sendStatement720('selected', 'onlinelesson', { response: p.mediaFormat }, { category: 'learning-type' });
+  } catch (e) { console.error('[xAPI] selected learning-type', e); }
 }
 
 /* ה-completed של הרכיב. סוגר קודם את הפריט הפתוח, ואז מדווח דרך היומן.

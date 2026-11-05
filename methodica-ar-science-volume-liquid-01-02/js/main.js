@@ -418,9 +418,11 @@ function s16qCheck() {
 
   s16qAttempts++;
   const isCorrect = s16qSelected === S16Q.correctId;
-  const s16qEl = document.querySelector('#s1 .s16q-hotspot[data-id="' + s16qSelected + '"]');
+  /* The hotspot's visible text is only its letter ("ג"), so the answer is passed as the option's
+     index (a/b/c = metadata answers 0/1/2) and the layer emits the full metadata string
+     (MOE monday 05.11.26: only the letter was sent). */
   xapiAnswered('001', 'q1', isCorrect, isCorrect || s16qAttempts >= S16Q.maxAttempts,
-    (xapiAnswerText(s16qEl) || (s16qEl && s16qEl.getAttribute('aria-label')) || s16qSelected));
+    { choices: [['a', 'b', 'c'].indexOf(s16qSelected)] });
 
   if (isCorrect) {
     s16qMark(S16Q.correctId, 'correct');
@@ -615,8 +617,9 @@ function s17qCheck() {
   const s17qLast = allRight || s17qAttempts >= S17Q.maxAttempts;
   xapiAnswered('002', 'q1', aRight, s17qLast,
     xapiAnswerText(document.querySelector('#s2 .scq-opt[data-part="a"][data-id="' + s17qSelectedParts.a + '"]')));
-  xapiAnswered('002', 'q2', bRight, s17qLast,
-    xapiAnswerText(document.querySelector('#s2 .scq-opt[data-part="b"][data-id="' + s17qSelectedParts.b + '"]')));
+  /* q2 is true-false: the response is the literal 'true' / 'false', never the label "כן" / "לא"
+     (guide §6.3b; MOE monday 05.11.26). */
+  xapiAnswered('002', 'q2', bRight, s17qLast, { value: s17qSelectedParts.b === 'yes' });
 
   if (allRight) {
     s17qMark('a', S17Q.correct.a, 'correct');

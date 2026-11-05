@@ -354,7 +354,10 @@ function s2qCheck() {
 
   s2qAttempts++;
   const isCorrect = s2qSelected === S2Q.correctValue;
-  xapiAnswered('001', 'q1', isCorrect, isCorrect || s2qAttempts >= S2Q.maxAttempts, String(s2qSelected));
+  /* The dropdown shows bare numbers ("751.25"); metadata holds "751.25 מ״ל". Pass the option's
+     index in the list (same order as metadata answers) so the layer emits the metadata string. */
+  xapiAnswered('001', 'q1', isCorrect, isCorrect || s2qAttempts >= S2Q.maxAttempts,
+    { choices: [[...document.querySelectorAll('#s2dd-list .mdq-option')].findIndex(li => li.textContent.trim() === String(s2qSelected))] });
 
   if (isCorrect) {
     s2qMark('correct');

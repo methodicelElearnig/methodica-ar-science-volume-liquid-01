@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>وحدة تعليمية — قياس حجم السائل وأدوات القياس · الجزء 01</title>
+  <!-- The shared xAPI library is fetched by unit-js/50-loader.js at the END of the body, i.e. after
+       the parser has already queued every image below; measured live (mass-measure-01), its request
+       did not go out until the last image had finished, which put the resume restore 20-45 s behind
+       a slow line (2026-11-03). Preloading it from the head puts it FIRST in the queue. The href must
+       equal what 50-loader.js builds (no ?v=, no crossorigin) or the browser fetches it twice;
+       the library letter here changes together with LIB720 there (the harness asserts it). -->
+  <link rel="preload" as="script" fetchpriority="high" href="https://lomdot.education.gov.il/metodica/720active/common/xapiwrapper.min.js">
+  <link rel="preload" as="script" fetchpriority="high" href="https://lomdot.education.gov.il/metodica/720active/common/xapi-720-l.js">
+  <link rel="preconnect" href="https://kata.cet.ac.il">
   <link rel="stylesheet" href="../unit-css/base.css?v=3">
   <link rel="stylesheet" href="../unit-css/scq.css?v=2">
   <link rel="stylesheet" href="../unit-css/img-zoom.css?v=1">
@@ -20,6 +29,12 @@
 <div id="boot-cover" style="position:fixed;inset:0;z-index:9999;background:#fff"></div>
 <script>
 (function () {
+  /* A Kata launch (registration in the query) may have a document to restore: raise the
+     flag HERE, before any script is fetched. bootXAPI raises it too, but it runs from the
+     last script tag, and on a cold cache those scripts arrive after the 800 ms below — so
+     the cover used to drop before the flag existed, exposing screen 0 for the whole wait
+     (2026-11-03). Without a registration (local, dev) the 800 ms behaviour is unchanged. */
+  if (/[?&]registration=/.test(location.search)) window.__resumeInFlight = true;
   var t0 = Date.now();
   function tick() {
     var c = document.getElementById('boot-cover');
@@ -129,7 +144,7 @@
                   data-zoom-alt="كوبان يحتويان على مشروب داكن: كوب طويل وضيّق وكوب منخفض وعريض">
             <svg class="img-zoom-btn__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1C11.8661 1 15 4.13371 15 7.99902C15 11.8643 11.8661 14.998 8 14.998C4.1339 14.998 1.00002 11.8643 1 7.99902C1 4.13371 4.13389 1 8 1Z" stroke="currentColor" stroke-width="2"/><path d="M12.6221 14.188L14.2657 12.6141L19.928 18.5274C20.3626 18.9813 20.347 19.7016 19.8931 20.1362C19.4392 20.5708 18.7189 20.5552 18.2843 20.1013L12.6221 14.188Z" fill="currentColor"/></svg>
           </button>
-          <img src="assets/img/Drinks.png"
+          <img loading="lazy" src="assets/img/Drinks.png"
                alt="كوبان يحتويان على مشروب داكن: كوب طويل وضيّق وكوب منخفض وعريض"
                onerror="this.style.display='none'">
         </div>
@@ -264,7 +279,7 @@
                   onclick="frcFlip(this)">
             <div class="frc-card-inner">
               <div class="frc-card-front">
-                <img class="img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
+                <img loading="lazy" class="img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
               </div>
               <div class="frc-card-back" aria-hidden="true">
                 <div class="frc-card-back-content">
@@ -286,7 +301,7 @@
                   onclick="frcFlip(this)">
             <div class="frc-card-inner">
               <div class="frc-card-front">
-                <img src="../unit-assets/img/pipette.png" alt="ماصّة">
+                <img loading="lazy" src="../unit-assets/img/pipette.png" alt="ماصّة">
               </div>
               <div class="frc-card-back" aria-hidden="true">
                 <div class="frc-card-back-content">
@@ -308,7 +323,7 @@
                   onclick="frcFlip(this)">
             <div class="frc-card-inner">
               <div class="frc-card-front">
-                <img src="assets/img/syringe.png" alt="محقنة">
+                <img loading="lazy" src="assets/img/syringe.png" alt="محقنة">
               </div>
               <div class="frc-card-back" aria-hidden="true">
                 <div class="frc-card-back-content">
@@ -366,7 +381,7 @@
 
         <div class="s3ddq-target-col">
           <div class="s3ddq-img-frame">
-            <img class="s3ddq-target-img img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
+            <img loading="lazy" class="s3ddq-target-img img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
           </div>
           <p class="s3ddq-target-label">ملعقة قياس طبّية</p>
           <div class="s3ddq-target" id="target-s3-spoon"></div>
@@ -374,7 +389,7 @@
 
         <div class="s3ddq-target-col">
           <div class="s3ddq-img-frame">
-            <img class="s3ddq-target-img" src="../unit-assets/img/pipette.png" alt="ماصّة">
+            <img loading="lazy" class="s3ddq-target-img" src="../unit-assets/img/pipette.png" alt="ماصّة">
           </div>
           <p class="s3ddq-target-label">ماصّة</p>
           <div class="s3ddq-target" id="target-s3-pipette"></div>
@@ -382,7 +397,7 @@
 
         <div class="s3ddq-target-col">
           <div class="s3ddq-img-frame">
-            <img class="s3ddq-target-img" src="assets/img/syringe.png" alt="محقنة">
+            <img loading="lazy" class="s3ddq-target-img" src="assets/img/syringe.png" alt="محقنة">
           </div>
           <p class="s3ddq-target-label">محقنة</p>
           <div class="s3ddq-target" id="target-s3-syringe"></div>
@@ -494,7 +509,7 @@
                   onclick="s4frcFlip(this)">
             <div class="frc-card-inner">
               <div class="frc-card-front">
-                <img src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
+                <img loading="lazy" src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
               </div>
               <div class="frc-card-back" aria-hidden="true">
                 <div class="frc-card-back-content">
@@ -516,7 +531,7 @@
                   onclick="s4frcFlip(this)">
             <div class="frc-card-inner">
               <div class="frc-card-front">
-                <img src="assets/img/ChemicalBeaker.png" alt="دورق">
+                <img loading="lazy" src="assets/img/ChemicalBeaker.png" alt="دورق">
               </div>
               <div class="frc-card-back" aria-hidden="true">
                 <div class="frc-card-back-content">
@@ -584,7 +599,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="spoon" onclick="s5qSelect('spoon')">
           <span class="s5q-card-frame">
-            <img class="img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
+            <img loading="lazy" class="img-contain" src="../unit-assets/img/MedicineSpoon.png" alt="ملعقة قياس طبّية">
           </span>
           <span class="s5q-card-label">ملعقة قياس طبّية</span>
         </button>
@@ -592,7 +607,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="pipette" onclick="s5qSelect('pipette')">
           <span class="s5q-card-frame">
-            <img src="../unit-assets/img/pipette.png" alt="ماصّة">
+            <img loading="lazy" src="../unit-assets/img/pipette.png" alt="ماصّة">
           </span>
           <span class="s5q-card-label">ماصّة</span>
         </button>
@@ -600,7 +615,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="cylinder" onclick="s5qSelect('cylinder')">
           <span class="s5q-card-frame">
-            <img src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
+            <img loading="lazy" src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
           </span>
           <span class="s5q-card-label">مخبار مدرّج</span>
         </button>
@@ -757,7 +772,7 @@
           <div class="s7sc-card-back">
             <p><strong>كيف نقرأ ارتفاع سطح السائل بشكل صحيح؟</strong></p>
             <p>نضع أعيننا على مستوى سطح السائل. النظر من الأعلى أو الأسفل قد يؤدي إلى خطأ في القراءة‎.</p>
-            <img class="s7sc-card-img s7sc-card-img--eye" src="assets/img/minEye.png" alt="عين على مستوى سطح السائل، تنظر في خط مستقيم إلى أدنى نقطة في الانحناء داخل المخبار المدرّج">
+            <img loading="lazy" class="s7sc-card-img s7sc-card-img--eye" src="assets/img/minEye.png" alt="عين على مستوى سطح السائل، تنظر في خط مستقيم إلى أدنى نقطة في الانحناء داخل المخبار المدرّج">
           </div>
           <canvas class="s7sc-card-cover" aria-hidden="true"></canvas>
         </div>
@@ -769,7 +784,7 @@
             <p><strong>إلى ماذا ننظر في المخبار المدرّج؟</strong></p>
             <p>يلتصق السائل بجدار الوعاء ويكوّن انحناءً صغيرًا‎.</p>
             <p>نقرأ القياس بحسب أدنى نقطة في الانحناء‎.</p>
-            <img class="s7sc-card-img s7sc-card-img--min" src="assets/img/min.png" alt="مخبار مدرّج يحتوي على سائل؛ نقطة حمراء تحدد أدنى نقطة في الانحناء، حيث تُقرأ قيمة القياس">
+            <img loading="lazy" class="s7sc-card-img s7sc-card-img--min" src="assets/img/min.png" alt="مخبار مدرّج يحتوي على سائل؛ نقطة حمراء تحدد أدنى نقطة في الانحناء، حيث تُقرأ قيمة القياس">
           </div>
           <canvas class="s7sc-card-cover" aria-hidden="true"></canvas>
         </div>
@@ -794,7 +809,7 @@
                aria-hidden on wrapper and hand: never intercepts the real
                scratch. See s7GhStart()/s7GhStop() in main.js. -->
           <div class="s7gh hidden" id="s7gh-hint" aria-hidden="true">
-            <img class="s7gh-hand" src="assets/img/s7gh-hand.svg" alt="" aria-hidden="true">
+            <img loading="lazy" class="s7gh-hand" src="assets/img/s7gh-hand.svg" alt="" aria-hidden="true">
           </div>
         </div>
 
@@ -804,7 +819,7 @@
     <!-- Coin cursor — a real element following the pointer over an
          unscratched card (native cursors are size-limited and can be
          silently rejected; this shows the actual coin.png asset). -->
-    <img class="s7sc-coin hidden" id="s7sc-coin" src="assets/img/coin.png" alt="" aria-hidden="true">
+    <img loading="lazy" class="s7sc-coin hidden" id="s7sc-coin" src="assets/img/coin.png" alt="" aria-hidden="true">
 
     <!-- Scratch sound effects. Not learner-facing controls, so plain
          <audio> with no controls attribute; playback is driven entirely
@@ -858,7 +873,7 @@
            inline coords, no entry-time measurement) and carry their own
            s8q-pulse animation; the container must never transform. -->
       <div class="s8q-img-wrap" data-reveal="2" data-reveal-fade>
-        <img class="s8q-img" src="assets/img/children.png" alt="ثلاثة طلاب ينظرون إلى مخبار مدرّج يحتوي على سائل فوق طاولة مختبر">
+        <img loading="lazy" class="s8q-img" src="assets/img/children.png" alt="ثلاثة طلاب ينظرون إلى مخبار مدرّج يحتوي على سائل فوق طاولة مختبر">
 
         <!-- Figure hit-regions (producer change: no visible dots — the
              learner clicks the student directly). Each button is an
@@ -877,7 +892,7 @@
                 aria-label="الطالبة من جهة اليسار"
                 style="left:17px; top:120px; width:310px; height:267px;"
                 onclick="s8qSelect('left', this)">
-          <img class="s8q-figure" src="assets/img/child-left.png" alt=""
+          <img loading="lazy" class="s8q-figure" src="assets/img/child-left.png" alt=""
                aria-hidden="true" style="left:-17px; top:-120px;">
         </button>
 
@@ -885,7 +900,7 @@
                 aria-label="الطالب في الوسط"
                 style="left:323px; top:0; width:228px; height:327px;"
                 onclick="s8qSelect('middle', this)">
-          <img class="s8q-figure" src="assets/img/child-middle.png" alt=""
+          <img loading="lazy" class="s8q-figure" src="assets/img/child-middle.png" alt=""
                aria-hidden="true" style="left:-323px; top:0;">
         </button>
 
@@ -893,14 +908,14 @@
                 aria-label="الطالبة من جهة اليمين"
                 style="left:464px; top:54px; width:254px; height:333px;"
                 onclick="s8qSelect('right', this)">
-          <img class="s8q-figure" src="assets/img/child-right.png" alt=""
+          <img loading="lazy" class="s8q-figure" src="assets/img/child-right.png" alt=""
                aria-hidden="true" style="left:-464px; top:-54px;">
         </button>
 
         <!-- Cylinder cutout — topmost, non-interactive: the glass sits in
              front of the students, so it occludes any figure glow behind
              it (see .s8q-occluder note in style.css). -->
-        <img class="s8q-occluder" src="assets/img/cylinder-children.png"
+        <img loading="lazy" class="s8q-occluder" src="assets/img/cylinder-children.png"
              alt="" aria-hidden="true">
       </div>
     </div>
@@ -1030,7 +1045,7 @@
                traverse count and asset are unchanged — see s9gh-scratch in
                style.css for the exact adjustment and its rationale. -->
           <div class="s7gh hidden" id="s9gh-hint" aria-hidden="true">
-            <img class="s7gh-hand" src="assets/img/s7gh-hand.svg" alt="" aria-hidden="true">
+            <img loading="lazy" class="s7gh-hand" src="assets/img/s7gh-hand.svg" alt="" aria-hidden="true">
           </div>
         </div>
 
@@ -1039,7 +1054,7 @@
 
     <!-- Coin cursor + sound effects — this screen's own instance,
          mirroring S7's exactly (see main.js s9sc* functions). -->
-    <img class="s7sc-coin hidden" id="s9sc-coin" src="assets/img/coin.png" alt="" aria-hidden="true">
+    <img loading="lazy" class="s7sc-coin hidden" id="s9sc-coin" src="assets/img/coin.png" alt="" aria-hidden="true">
     <audio id="s9sc-scratch-audio" src="assets/audio/coin_scratching.mp3" preload="auto"></audio>
     <audio id="s9sc-celebration-audio" src="assets/audio/celebration.mp3" preload="auto"></audio>
 
@@ -1201,7 +1216,7 @@
 
     <div class="s11er-scene">
       <div class="s11er-bg" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-lab-bg.png" alt="مختبر علوم يحتوي على أدوات قياس مختلفة">
+        <img loading="lazy" src="assets/img/escape-lab-bg.png" alt="مختبر علوم يحتوي على أدوات قياس مختلفة">
       </div>
 
       <!-- 6 hidden objects (positions from Figma, scene-relative).
@@ -1223,27 +1238,27 @@
       <button class="s11er-object s11er-object--eye" id="s11er-obj-eye" type="button"
               aria-label="بوستر عين على الحائط — اضغطوا لاكتشاف مبدأ القياس"
               onclick="s11erOpen('eye')" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-eye.png" alt="">
+        <img loading="lazy" src="assets/img/escape-eye.png" alt="">
       </button>
       <button class="s11er-object s11er-object--emptybeaker" id="s11er-obj-emptybeaker" type="button"
               aria-label="دورق فارغ — اضغطوا لاكتشاف مبدأ القياس"
               onclick="s11erOpen('emptybeaker')" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-beaker-empty.png" alt="">
+        <img loading="lazy" src="assets/img/escape-beaker-empty.png" alt="">
       </button>
       <button class="s11er-object s11er-object--fullbeaker" id="s11er-obj-fullbeaker" type="button"
               aria-label="دورق يحتوي على سائل أخضر — اضغطوا لاكتشاف مبدأ القياس"
               onclick="s11erOpen('fullbeaker')" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-beaker-full.png" alt="">
+        <img loading="lazy" src="assets/img/escape-beaker-full.png" alt="">
       </button>
       <button class="s11er-object s11er-object--cylinder" id="s11er-obj-cylinder" type="button"
               aria-label="مخبار مدرّج طويل يحتوي على سائل — اضغطوا لاكتشاف مبدأ القياس"
               onclick="s11erOpen('cylinder')" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-cylinder.png" alt="">
+        <img loading="lazy" src="assets/img/escape-cylinder.png" alt="">
       </button>
       <button class="s11er-object s11er-object--pipette" id="s11er-obj-pipette" type="button"
               aria-label="ماصّة — اضغطوا لاكتشاف مبدأ القياس"
               onclick="s11erOpen('pipette')" data-reveal="3" data-reveal-fade>
-        <img src="assets/img/escape-pipette.png" alt="">
+        <img loading="lazy" src="assets/img/escape-pipette.png" alt="">
       </button>
 
       <!-- 6 speech-bubble modals (one per object; Figma group mapping).
@@ -1260,7 +1275,7 @@
            role="status" aria-live="polite">
         <div class="s11er-bubble-text">
           <p>نضع أعيننا على مستوى سطح السائل. النظر من الأعلى أو الأسفل قد يؤدي إلى خطأ في القراءة‎.</p>
-          <img class="s11er-bubble-img" src="assets/img/minEye.png"
+          <img loading="lazy" class="s11er-bubble-img" src="assets/img/minEye.png"
                alt="رسم توضيحي: خط نظر مستقيم على مستوى سطح السائل">
         </div>
       </div>
@@ -1299,12 +1314,12 @@
            aria-label="المبادئ التي تم إيجادها" data-reveal="2">
         <p class="s11er-progress-title">المبادئ التي تم إيجادها</p>
         <div class="s11er-progress-dots">
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-1" src="assets/img/escape-dot-current.svg" alt=""><span>1</span></div>
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-2" src="assets/img/escape-dot-current.svg" alt=""><span>2</span></div>
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-3" src="assets/img/escape-dot-current.svg" alt=""><span>3</span></div>
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-4" src="assets/img/escape-dot-current.svg" alt=""><span>4</span></div>
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-5" src="assets/img/escape-dot-current.svg" alt=""><span>5</span></div>
-          <div class="s11er-progress-dot"><img id="s11er-dot-ico-6" src="assets/img/escape-dot-current.svg" alt=""><span>6</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-1" src="assets/img/escape-dot-current.svg" alt=""><span>1</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-2" src="assets/img/escape-dot-current.svg" alt=""><span>2</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-3" src="assets/img/escape-dot-current.svg" alt=""><span>3</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-4" src="assets/img/escape-dot-current.svg" alt=""><span>4</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-5" src="assets/img/escape-dot-current.svg" alt=""><span>5</span></div>
+          <div class="s11er-progress-dot"><img loading="lazy" id="s11er-dot-ico-6" src="assets/img/escape-dot-current.svg" alt=""><span>6</span></div>
         </div>
       </div>
     </div>
@@ -1358,7 +1373,7 @@
     <div class="s12q-backdrop" aria-hidden="true" data-reveal="3" data-reveal-fade>
       <div class="s11er-scene">
         <div class="s11er-bg">
-          <img src="assets/img/escape-lab-bg.png" alt="">
+          <img loading="lazy" src="assets/img/escape-lab-bg.png" alt="">
         </div>
         <div class="s11er-object s11er-object--table">
           <table class="s11er-table">
@@ -1368,11 +1383,11 @@
             <tr><td>3</td><td>51</td></tr>
           </table>
         </div>
-        <div class="s11er-object s11er-object--eye"><img src="assets/img/escape-eye.png" alt=""></div>
-        <div class="s11er-object s11er-object--emptybeaker"><img src="assets/img/escape-beaker-empty.png" alt=""></div>
-        <div class="s11er-object s11er-object--fullbeaker"><img src="assets/img/escape-beaker-full.png" alt=""></div>
-        <div class="s11er-object s11er-object--cylinder"><img src="assets/img/escape-cylinder.png" alt=""></div>
-        <div class="s11er-object s11er-object--pipette"><img src="assets/img/escape-pipette.png" alt=""></div>
+        <div class="s11er-object s11er-object--eye"><img loading="lazy" src="assets/img/escape-eye.png" alt=""></div>
+        <div class="s11er-object s11er-object--emptybeaker"><img loading="lazy" src="assets/img/escape-beaker-empty.png" alt=""></div>
+        <div class="s11er-object s11er-object--fullbeaker"><img loading="lazy" src="assets/img/escape-beaker-full.png" alt=""></div>
+        <div class="s11er-object s11er-object--cylinder"><img loading="lazy" src="assets/img/escape-cylinder.png" alt=""></div>
+        <div class="s11er-object s11er-object--pipette"><img loading="lazy" src="assets/img/escape-pipette.png" alt=""></div>
       </div>
       <div class="s12q-veil"></div>
     </div>
@@ -1816,18 +1831,18 @@
   </div>
 
 </div><!-- /#app -->
-<script src="../unit-js/10-identity.js?v=3"></script>
-<script src="../unit-js/20-xapi.js?v=2"></script>
+<script src="../unit-js/10-identity.js?v=4"></script>
+<script src="../unit-js/20-xapi.js?v=3"></script>
 <script src="../unit-js/25-report.js?v=1"></script>
-<script src="../unit-js/40-resume.js?v=3"></script>
+<script src="../unit-js/40-resume.js?v=4"></script>
 <script src="../unit-js/45-resume-paint.js?v=1"></script>
-<script src="../unit-js/50-loader.js?v=1"></script>
+<script src="../unit-js/50-loader.js?v=2"></script>
 <script src="../unit-js/05-motion.js?v=1"></script>
 <script src="../unit-js/00-util.js?v=2"></script>
 <script src="../unit-js/30-nav.js?v=2"></script>
 <script src="../unit-js/32-navlabels.js?v=1"></script>
 <script src="../unit-js/35-popup.js?v=1"></script>
-<script src="js/main.js?v=14"></script>
+<script src="js/main.js?v=15"></script>
 <script src="../unit-js/90-boot.js?v=2"></script>
 </body>
 </html>

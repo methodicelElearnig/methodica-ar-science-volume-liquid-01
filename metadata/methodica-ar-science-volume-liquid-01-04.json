@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 4,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "applying-a-model-or-procedure"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["applying-a-model-or-procedure"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
-  "estimatedTimeInMinutes": 1,
+  "estimatedTimeInMinutes": 5,
+  "createdAt": "2026-11-02T14:12:52.829888Z",
+  "updatedAt": "2026-11-02T14:12:52.829905Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-04/methodica-ar-science-volume-liquid-01-04-001/",

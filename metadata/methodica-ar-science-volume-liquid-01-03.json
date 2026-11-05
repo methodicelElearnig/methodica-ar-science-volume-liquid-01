@@ -12,16 +12,12 @@
   "masteryLevel": null,
   "order": 3,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "applying-a-model-or-procedure"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["applying-a-model-or-procedure"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 10,
+  "createdAt": "2026-11-02T14:12:50.825161Z",
+  "updatedAt": "2026-11-02T14:12:50.825179Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-001/",
@@ -34,15 +30,17 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-001/q1",
           "questionType": "choice",
           "questionText": "ما هي الأداة المناسبة لقياس كمية العصير في الكوب المملوء بعصير البرتقال بدقة؟ اضغطوا على الإجابة الصحيحة.",
-          "answers": [
-            "مخبار مدرّج",
-            "ملعقة",
-            "مسطرة",
-            "ميزان رقمي"
-          ],
-          "correctAnswers": [
-            "مخبار مدرّج"
-          ]
+          "answers": ["مخبار مدرّج", "ملعقة", "مسطرة", "ميزان رقمي"],
+          "correctAnswers": ["مخبار مدرّج"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "مخبار مدرّج", "description": "مخبار مدرّج"},
+              {"id": "ملعقة", "description": "ملعقة"},
+              {"id": "مسطرة", "description": "مسطرة"},
+              {"id": "ميزان رقمي", "description": "ميزان رقمي"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["مخبار مدرّج"]
         }
       ]
     },
@@ -57,19 +55,19 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-002/q1",
           "questionType": "choice",
           "questionText": "اختاروا الأدوات الثلاث التي تقيس حجم السوائل. يمكن اختيار حتى 3 إجابات.",
-          "answers": [
-            "مخبار مدرّج",
-            "مسطرة",
-            "ميزان رقمي",
-            "ساعة توقيت",
-            "كوب قياس",
-            "محقنة"
-          ],
-          "correctAnswers": [
-            "مخبار مدرّج",
-            "كوب قياس",
-            "محقنة"
-          ]
+          "answers": ["مخبار مدرّج", "مسطرة", "ميزان رقمي", "ساعة توقيت", "كوب قياس", "محقنة"],
+          "correctAnswers": ["مخبار مدرّج", "كوب قياس", "محقنة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "مخبار مدرّج", "description": "مخبار مدرّج"},
+              {"id": "مسطرة", "description": "مسطرة"},
+              {"id": "ميزان رقمي", "description": "ميزان رقمي"},
+              {"id": "ساعة توقيت", "description": "ساعة توقيت"},
+              {"id": "كوب قياس", "description": "كوب قياس"},
+              {"id": "محقنة", "description": "محقنة"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["مخبار مدرّج[,]كوب قياس[,]محقنة"]
         }
       ]
     },
@@ -85,22 +83,24 @@
           "questionType": "numeric",
           "questionText": "قاست طالبة نفس الكمية مرتين: 20 و-22 ملل. أ. ما هو المعدل؟",
           "answers": [],
-          "correctAnswers": [
-            21
-          ]
+          "correctAnswers": [21],
+          "xapiInteractionComponents": null,
+          "correctXapiResponsesPattern": ["21"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-03/methodica-ar-science-volume-liquid-01-03-003/q2",
           "questionType": "choice",
           "questionText": "ب. هل القياسان كافيان؟",
-          "answers": [
-            "نعم، القياسان كافيان",
-            "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة",
-            "لا يوجد فرق"
-          ],
-          "correctAnswers": [
-            "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة"
-          ]
+          "answers": ["نعم، القياسان كافيان", "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة", "لا يوجد فرق"],
+          "correctAnswers": ["لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "نعم، القياسان كافيان", "description": "نعم، القياسان كافيان"},
+              {"id": "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة", "description": "لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة"},
+              {"id": "لا يوجد فرق", "description": "لا يوجد فرق"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["لا، يُفضّل إجراء 3 قياسات لزيادة الدقّة"]
         }
       ]
     },
@@ -121,9 +121,16 @@
             "لا فرق في الموثوقية لأن المعدل متساوٍ",
             "لا يمكن المعرفة"
           ],
-          "correctAnswers": [
-            "أمل، لأن القياسات متقاربة من بعضها البعض"
-          ]
+          "correctAnswers": ["أمل، لأن القياسات متقاربة من بعضها البعض"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "مها، لأن المجال أكبر", "description": "مها، لأن المجال أكبر"},
+              {"id": "أمل، لأن القياسات متقاربة من بعضها البعض", "description": "أمل، لأن القياسات متقاربة من بعضها البعض"},
+              {"id": "لا فرق في الموثوقية لأن المعدل متساوٍ", "description": "لا فرق في الموثوقية لأن المعدل متساوٍ"},
+              {"id": "لا يمكن المعرفة", "description": "لا يمكن المعرفة"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["أمل، لأن القياسات متقاربة من بعضها البعض"]
         }
       ]
     }

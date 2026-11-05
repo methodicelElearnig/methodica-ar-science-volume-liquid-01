@@ -438,9 +438,9 @@ function initS3Player() {
       events: {
         onStateChange: function (e) {
           /* xAPI played/paused (state machine in 20-xapi.js). The catalogue has no video item for
-             this part, so the video reports against 001 — the teaspoon-dosage question it is about —
-             and S3 is mapped to 001 (decided 2026-09-28). */
-          try { xapiYouTubeState(e, '001'); } catch (_) {}
+             this part; the video reports against 002, the item still open when S3 is reached
+             (MOE monday 05.11.26: reporting on 001 re-opened an item that had already completed). */
+          try { xapiYouTubeState(e, '002'); } catch (_) {}
           if (e.data === YT.PlayerState.ENDED) s3OnVideoEnded();
         },
         onError: function () { s3OnVideoEnded(); }
@@ -851,14 +851,14 @@ initNavLabels();
 /* ═══════════════════ xAPI (720) — this part's config ═══════════════════
    Data only; the shared layer in ../unit-js/ reads it at call time (guide §6.1).
    ⚠️ SCREEN_TO_SUBCONTENT must hold exactly TOTAL_SCREENS keys (4), 0..3.
-   S3's video has no catalogue item of its own; it belongs to 001 (the teaspoon dosage it is
-   about), so leaving 002 for S3 closes 002 and re-opens 001 (its second 'completed' is
-   suppressed by the ledger). */
+   S3's video has no catalogue item of its own. Until 05.11.26 it was mapped to 001, so leaving 002
+   for S3 closed 002 and sent 'initialized' + 'played' on the already-completed 001 (MOE monday).
+   It now stays on 002, the open item: no re-open, and 002 completes with the component. */
 var SCREEN_TO_SUBCONTENT = {
   0: null,          // transition
   1: ['001', 1],    // SingleChoice — medicine dose by body weight
   2: ['002', 1],    // SingleChoice — mass vs volume (Ido / Tamar)
-  3: ['001', 2]     // video "a spoon that saves lives" — reported against 001
+  3: ['002', 2]     // video "a spoon that saves lives" — stays on the open item 002
 };
 
 var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-05';

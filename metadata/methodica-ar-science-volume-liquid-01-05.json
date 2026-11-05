@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 5,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "analyzing"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["analyzing"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 4,
+  "createdAt": "2026-11-02T14:12:53.736924Z",
+  "updatedAt": "2026-11-02T14:12:53.736941Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-001/",
@@ -32,14 +28,16 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-05/methodica-ar-science-volume-liquid-01-05-001/q1",
           "questionType": "choice",
           "questionText": "يظهر أمامكم دواء أمريكي مع تعليمات باللغة الإنجليزية على الملصق. معنى الملصق بالعربية: الجرعة الموصى بها - ملعقة صغيرة واحدة لكل 10 كغم من وزن الجسم. قاموس المصطلحات: Dose: الجرعة/المقدار؛ TSP (teaspoon): ملعقة صغيرة (5 ملل في القياس الطبّي)؛ Body Weight: وزن الجسم. وزن علاء 30 كغم. على كم ملل سيحصل؟",
-          "answers": [
-            "5 ملل",
-            "10 ملل",
-            "15 ملل"
-          ],
-          "correctAnswers": [
-            "15 ملل"
-          ]
+          "answers": ["5 ملل", "10 ملل", "15 ملل"],
+          "correctAnswers": ["15 ملل"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "5 ملل", "description": "5 ملل"},
+              {"id": "10 ملل", "description": "10 ملل"},
+              {"id": "15 ملل", "description": "15 ملل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["15 ملل"]
         }
       ]
     },
@@ -61,6 +59,20 @@
             "كلاهما مخطئ، لأن الكتلة والحجم لا يعنيان الشيء نفسه."
           ],
           "correctAnswers": [
+            "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط."
+          ],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "سوسن فقط على صواب، لأنه لا يمكن معرفة الحجم من خلال قياس الكتلة.", "description": "سوسن فقط على صواب، لأنه لا يمكن معرفة الحجم من خلال قياس الكتلة."},
+              {
+                "id": "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط.",
+                "description": "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط."
+              },
+              {"id": "سامر فقط على صواب، لأن قياس الكتلة دائمًا أدقّ من قياس حجم السائل.", "description": "سامر فقط على صواب، لأن قياس الكتلة دائمًا أدقّ من قياس حجم السائل."},
+              {"id": "كلاهما مخطئ، لأن الكتلة والحجم لا يعنيان الشيء نفسه.", "description": "كلاهما مخطئ، لأن الكتلة والحجم لا يعنيان الشيء نفسه."}
+            ]
+          },
+          "correctXapiResponsesPattern": [
             "كلاهما على صواب، لأن لكل مادة توجد كتلة وحجم أيضًا. القياسان المختلفان يؤديان إلى نفس الاستنتاج بالضبط."
           ]
         }

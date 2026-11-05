@@ -1188,13 +1188,14 @@ function s3ddqCheck() {
   const allCorrect = Object.keys(S3DDQ.correctMap).every(
     tId => s3ddqPlacement[S3DDQ.correctMap[tId]] === tId
   );
-  /* xAPI 004 q1 (matching), after allCorrect is final. Answer = each tool target and the case
-     card placed on it (xapiZoneAnswer's id template does not fit this board). */
+  /* xAPI 004 q1 (matching), after allCorrect is final. One pair per case card placed: source = the
+     case text, target = the tool's visible label (both are the metadata strings), so the layer emits
+     'S[.]T[,]…' in answers.source order (MOE monday 05.11.26: was 'pipette: … | …'). */
   xapiAnswered('004', 'q1', allCorrect, allCorrect || s3ddqAttempts >= S3DDQ.maxAttempts,
-    Object.keys(S3DDQ.correctMap).map(tId => {
-      const card = Object.keys(s3ddqPlacement).find(c => s3ddqPlacement[c] === tId);
-      return tId.replace('target-s3-', '') + ': ' + (card ? s3ddqTexts[card] : '—');
-    }).join(' | '));
+    { pairs: Object.keys(s3ddqPlacement).filter(c => s3ddqPlacement[c]).map(c => {
+      const lbl = document.querySelector('#' + s3ddqPlacement[c])?.parentElement?.querySelector('.s3ddq-target-label');
+      return { source: s3ddqTexts[c], target: lbl ? lbl.textContent : '' };
+    }) });
 
   if (allCorrect) {
     s3ddqChecked = true;
@@ -1903,6 +1904,7 @@ function selectOptionS6(cardEl) {
 
 function advanceFromS6() {
   if (!s6Selected) return;
+  xapiSelectedLearningType(s6Selected);   // the confirmed choice, not the card click
   // Branch to the selected learning path.
   if (s6Selected === 'scratch-card') goTo(7);
   else if (s6Selected === 'escape-room') { s11erEntryScreen = 6; goTo(11); }
@@ -2753,9 +2755,10 @@ function s10qCheck() {
 
   const allCorrect = results.every(r => r.correct);
   /* xAPI 007 q2 (fill-in, 4 blanks) — the same catalogue question on the scratch-card path. One
-     all-or-nothing verdict; 2 attempts. Answer = the four chosen labels in order. */
+     all-or-nothing verdict; 2 attempts. Answer = the four chosen labels in order, as values: the
+     layer joins them by the metadata type ('[,]' for fill-in, 'step[.]value[,]…' once performance). */
   xapiAnswered('007', 'q2', allCorrect, allCorrect || s10qAttempts >= 2,
-    [1, 2, 3, 4].map(n => mdqOptionText('s10q-list-', s10qSelections[n])).join(' | '));
+    { values: [1, 2, 3, 4].map(n => mdqOptionText('s10q-list-', s10qSelections[n])) });
 
   if (allCorrect) {
     results.forEach(r => s10qMarkBlank(r.n, 'correct'));
@@ -3260,9 +3263,9 @@ function s12qCheck() {
 
   const allCorrect = results.every(r => r.correct);
   /* xAPI 007 q2 (fill-in, 4 blanks) — the same catalogue question on the escape-room path. One
-     all-or-nothing verdict; 2 attempts. Answer = the four chosen labels in order. */
+     all-or-nothing verdict; 2 attempts. Answer = the four chosen labels in order, as values (see S10). */
   xapiAnswered('007', 'q2', allCorrect, allCorrect || s12qAttempts >= 2,
-    [1, 2, 3, 4].map(n => mdqOptionText('s12q-list-', s12qSelections[n])).join(' | '));
+    { values: [1, 2, 3, 4].map(n => mdqOptionText('s12q-list-', s12qSelections[n])) });
 
   if (allCorrect) {
     results.forEach(r => s12qMarkBlank(r.n, 'correct'));
@@ -3604,13 +3607,13 @@ function s12ddqCheck() {
     tId => s12ddqPlacement[S12DDQ.correctMap[tId]] === tId
   );
   /* xAPI 008 q1 (sequencing), after allCorrect is final. Answer = the learner's order: the card
-     text placed in slots 1..5. */
+     text placed in slots 1..5, no numbering; the layer emits the metadata strings joined by '[,]'. */
   xapiAnswered('008', 'q1', allCorrect, allCorrect || s12ddqAttempts >= S12DDQ.maxAttempts,
-    Object.keys(S12DDQ.correctMap).map((tId, i) => {
+    { order: Object.keys(S12DDQ.correctMap).map(tId => {
       const card = Object.keys(s12ddqPlacement).find(c => s12ddqPlacement[c] === tId);
       const el = card && document.getElementById(card);
-      return (i + 1) + '. ' + (el ? el.textContent.replace(/\s+/g, ' ').trim() : '—');
-    }).join(' | '));
+      return el ? el.textContent : '';
+    }) });
 
   if (allCorrect) {
     s12ddqChecked = true;
@@ -4123,6 +4126,10 @@ var SCREEN_TO_SUBCONTENT = {
 var XAPI_COMP_SLUG     = 'methodica-ar-science-volume-liquid-01-01';
 var XAPI_COMP_ID       = XAPI_ID_PREFIX + XAPI_COMP_SLUG + '/';
 var XAPI_EVAL_ITEMS    = { '002': 1, '004': 1, '006': 1, '007': 1, '008': 1, '009': 1 };
+/* The S6 learning-path choice ('selected', learning-type — unit-js/20-xapi.js xapiSelectedLearningType):
+   both paths live inside item 007, so both report its mediaFormat from metadata/. */
+var XAPI_LEARNING_PATHS = { 'scratch-card': { item: '007', mediaFormat: 'interactive-content' },
+                            'escape-room':  { item: '007', mediaFormat: 'interactive-content' } };
 /* 01-007 spans the two learning paths: q1 (S8 hotspot) exists only on the scratch-card path, q2 on
    both (S10 / S12). The O-8 default scores an item over every declared question, so the escape path
    could never pass 007 (live test 2026-11-02: 0.5, false). Score 007 over the questions the learner

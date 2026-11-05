@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 1,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "applying-a-model-or-procedure"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["applying-a-model-or-procedure"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 17,
+  "createdAt": "2026-11-02T14:12:42.665502Z",
+  "updatedAt": "2026-11-02T14:12:42.665520Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-001/",
@@ -40,15 +36,17 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-002/q1",
           "questionType": "choice",
           "questionText": "في أي كوب يُشغِل المشروب حيزًا أكبر؟ (أي يحتوي على كمية أكبر من المشروب)",
-          "answers": [
-            "في الكوب الطويل",
-            "في الكوب المنخفض",
-            "الكمية متساوية في الكوبين",
-            "لا يمكن المعرفة"
-          ],
-          "correctAnswers": [
-            "لا يمكن المعرفة"
-          ]
+          "answers": ["في الكوب الطويل", "في الكوب المنخفض", "الكمية متساوية في الكوبين", "لا يمكن المعرفة"],
+          "correctAnswers": ["لا يمكن المعرفة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "في الكوب الطويل", "description": "في الكوب الطويل"},
+              {"id": "في الكوب المنخفض", "description": "في الكوب المنخفض"},
+              {"id": "الكمية متساوية في الكوبين", "description": "الكمية متساوية في الكوبين"},
+              {"id": "لا يمكن المعرفة", "description": "لا يمكن المعرفة"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["لا يمكن المعرفة"]
         }
       ]
     },
@@ -77,25 +75,30 @@
               "يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة.",
               "يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه."
             ],
-            "target": [
-              "ملعقة قياس طبّية",
-              "ماصّة",
-              "محقنة"
-            ]
+            "target": ["ملعقة قياس طبّية", "ماصّة", "محقنة"]
           },
           "correctAnswers": [
-            {
-              "source": "في المختبر يجب إضافة 5 ملل بالضبط من محلول الصبغة إلى السائل الموجود في أنبوب الاختبار.",
-              "target": "ماصّة"
-            },
-            {
-              "source": "يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة.",
-              "target": "ملعقة قياس طبّية"
-            },
-            {
-              "source": "يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه.",
-              "target": "محقنة"
-            }
+            {"source": "في المختبر يجب إضافة 5 ملل بالضبط من محلول الصبغة إلى السائل الموجود في أنبوب الاختبار.", "target": "ماصّة"},
+            {"source": "يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة.", "target": "ملعقة قياس طبّية"},
+            {"source": "يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه.", "target": "محقنة"}
+          ],
+          "xapiInteractionComponents": {
+            "source": [
+              {
+                "id": "في المختبر يجب إضافة 5 ملل بالضبط من محلول الصبغة إلى السائل الموجود في أنبوب الاختبار.",
+                "description": "في المختبر يجب إضافة 5 ملل بالضبط من محلول الصبغة إلى السائل الموجود في أنبوب الاختبار."
+              },
+              {"id": "يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة.", "description": "يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة."},
+              {"id": "يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه.", "description": "يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه."}
+            ],
+            "target": [
+              {"id": "ملعقة قياس طبّية", "description": "ملعقة قياس طبّية"},
+              {"id": "ماصّة", "description": "ماصّة"},
+              {"id": "محقنة", "description": "محقنة"}
+            ]
+          },
+          "correctXapiResponsesPattern": [
+            "في المختبر يجب إضافة 5 ملل بالضبط من محلول الصبغة إلى السائل الموجود في أنبوب الاختبار.[.]ماصّة[,]يحتاج طفل إلى تناول جرعة مقدارها 5 ملل من شراب الدواء باستخدام الأداة المرفقة للعبوة.[.]ملعقة قياس طبّية[,]يجب إعطاء قطّ صغير 5 ملل من بديل الحليب مباشرةً في فمه.[.]محقنة"
           ]
         }
       ]
@@ -119,14 +122,16 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-006/q1",
           "questionType": "choice",
           "questionText": "علينا قياس 100 ملل لإجراء تجربة في الصف (وهي كمية تعادل كوب شرب تقريبًا). أي أداة نختار؟ اضغطوا على الأداة المناسبة.",
-          "answers": [
-            "ملعقة قياس طبّية",
-            "ماصّة",
-            "مخبار مدرّج"
-          ],
-          "correctAnswers": [
-            "مخبار مدرّج"
-          ]
+          "answers": ["ملعقة قياس طبّية", "ماصّة", "مخبار مدرّج"],
+          "correctAnswers": ["مخبار مدرّج"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "ملعقة قياس طبّية", "description": "ملعقة قياس طبّية"},
+              {"id": "ماصّة", "description": "ماصّة"},
+              {"id": "مخبار مدرّج", "description": "مخبار مدرّج"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["مخبار مدرّج"]
         }
       ]
     },
@@ -141,23 +146,25 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-007/q1",
           "questionType": "choice",
           "questionText": "يظهر في الصورة ثلاثة طلاب ومخبار مدرّج يحتوي على ماء. من يقرأ ارتفاع السائل بالطريقة الصحيحة؟",
-          "answers": [
-            "الطالبة من جهة اليسار",
-            "الطالب في الوسط",
-            "الطالبة من جهة اليمين"
-          ],
-          "correctAnswers": [
-            "الطالبة من جهة اليمين"
-          ]
+          "answers": ["الطالبة من جهة اليسار", "الطالب في الوسط", "الطالبة من جهة اليمين"],
+          "correctAnswers": ["الطالبة من جهة اليمين"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "الطالبة من جهة اليسار", "description": "الطالبة من جهة اليسار"},
+              {"id": "الطالب في الوسط", "description": "الطالب في الوسط"},
+              {"id": "الطالبة من جهة اليمين", "description": "الطالبة من جهة اليمين"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["الطالبة من جهة اليمين"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-007/q2",
           "questionType": "fill-in",
           "questionText": "أكملوا الجمل. القياس العلمي الجيد للسائل يحتاج إلى: ___ (1) مناسبة، قراءة ___ (2)، إجراء ___ (3) قياسات، وحساب ___ (4). اختاروا لكل مكان فارغ الكلمة المناسبة.",
           "answers": [],
-          "correctAnswers": [
-            "1: أداة، 2: على مستوى العينين، 3: ثلاث، 4: المعدل"
-          ]
+          "correctAnswers": ["1: أداة، 2: على مستوى العينين، 3: ثلاث، 4: المعدل"],
+          "xapiInteractionComponents": null,
+          "correctXapiResponsesPattern": ["1: أداة، 2: على مستوى العينين، 3: ثلاث، 4: المعدل"]
         }
       ]
     },
@@ -185,6 +192,18 @@
             "التكرار - إجراء 3 قياسات",
             "مدى تقارب النتائج من بعضها البعض – فحص الموثوقية",
             "حساب المعدل"
+          ],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "اختيار أداة القياس – هل تستطيع الأداة استيعاب كمية السائل؟", "description": "اختيار أداة القياس – هل تستطيع الأداة استيعاب كمية السائل؟"},
+              {"id": "التكرار - إجراء 3 قياسات", "description": "التكرار - إجراء 3 قياسات"},
+              {"id": "حساب المعدل", "description": "حساب المعدل"},
+              {"id": "القياس على مستوى العينين", "description": "القياس على مستوى العينين"},
+              {"id": "مدى تقارب النتائج من بعضها البعض – فحص الموثوقية", "description": "مدى تقارب النتائج من بعضها البعض – فحص الموثوقية"}
+            ]
+          },
+          "correctXapiResponsesPattern": [
+            "اختيار أداة القياس – هل تستطيع الأداة استيعاب كمية السائل؟[,]القياس على مستوى العينين[,]التكرار - إجراء 3 قياسات[,]مدى تقارب النتائج من بعضها البعض – فحص الموثوقية[,]حساب المعدل"
           ]
         }
       ]
@@ -200,15 +219,17 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-009/q1",
           "questionType": "choice",
           "questionText": "يحتاج طفل مريض بعمر 6 أشهر إلى دواء بجرعة 2 ملل. أي أداة تختارون؟",
-          "answers": [
-            "ملعقة صغيرة من المطبخ",
-            "محقنة",
-            "مخبار مدرّج كبير بسِعة 500 ملل",
-            "قنّينة طفل"
-          ],
-          "correctAnswers": [
-            "محقنة"
-          ]
+          "answers": ["ملعقة صغيرة من المطبخ", "محقنة", "مخبار مدرّج كبير بسِعة 500 ملل", "قنّينة طفل"],
+          "correctAnswers": ["محقنة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "ملعقة صغيرة من المطبخ", "description": "ملعقة صغيرة من المطبخ"},
+              {"id": "محقنة", "description": "محقنة"},
+              {"id": "مخبار مدرّج كبير بسِعة 500 ملل", "description": "مخبار مدرّج كبير بسِعة 500 ملل"},
+              {"id": "قنّينة طفل", "description": "قنّينة طفل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["محقنة"]
         }
       ]
     }

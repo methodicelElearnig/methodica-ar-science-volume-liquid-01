@@ -145,7 +145,49 @@ const loader = unitJs['50-loader.js'];
 const letter = /'xapi-720-([a-z])\.js'\s*:\s*'xapi-720-([a-z])\.js'/.exec(loader);
 const rx = /XAPI_USING_G = \/xapi-720-\[([a-z]+)\]\\\.js\//.exec(loader);
 ok('loader', 'resume library letter and the -i letter are inside the XAPI_USING_G regex', letter && rx && rx[1].includes(letter[1]) && rx[1].includes(letter[2]), letter && letter.slice(1).join(',') + ' / ' + (rx && rx[1]));
-ok('loader', 'the local stub name matches the regex', fs.existsSync(path.join(BASE, '_test')) ? /xapi-720-k\.js/.test(fs.readdirSync(path.join(BASE, '_test')).join(' ')) : true);
+ok('loader', 'the local stub name matches the regex', fs.existsSync(path.join(BASE, '_test')) ? /xapi-720-l\.js/.test(fs.readdirSync(path.join(BASE, '_test')).join(' ')) : true);
+/* Leave save through xapi-720-l.js (2026-11-05, from methodica-math-percent-03 8b63a4f) */
+ok('loader', 'resume loads xapi-720-l.js (the leave save)', letter && letter[1] === 'l', letter && letter[1]);
+ok('resume', 'the leave handler goes through saveState720OnLeave, typeof-guarded, with flushResumeSave\'s guards',
+  /function flushResumeSaveOnLeave\(\) \{\s*if \(_leavingToNextPart\) return;\s*flushResumeSaveLeaving\(\);/.test(unitJs['40-resume.js'])
+  && /function flushResumeSaveLeaving\(\) \{\s*if \(!RESUME_ENABLED \|\| !_resumeReady \|\| _restoring \|\| _resumeReadFailed\) return;\s*var save = \(typeof window\.saveState720OnLeave === 'function'\) \? window\.saveState720OnLeave : window\.saveState720;/.test(unitJs['40-resume.js']));
+/* 2026-11-03 resume hardening (BOOT-AND-RESUME-HARDENING-2026-11-03.md §2.1–2.3, §2.6 k–p) */
+{
+  const R = unitJs['40-resume.js'];
+  const body = name => { const i = R.indexOf('function ' + name + '('); if (i < 0) return ''; let d = 0, j = R.indexOf('{', i);
+    for (let k = j; k < R.length; k++) { if (R[k] === '{') d++; else if (R[k] === '}' && --d === 0) return R.slice(j, k + 1); } return ''; };
+  ok('shape', '40-resume.js: drainPendingUnitState persists the document as read, never a capture',
+    !/captureUnitState\(/.test(body('drainPendingUnitState')) && /persistUnitState\(_unitState\)/.test(body('drainPendingUnitState')));
+  ok('shape', '40-resume.js: markSent does not persist before _resumeReady', /if \(!_resumeReady\) return;[\s\S]*persistUnitState\(captureUnitState\(\)\)/.test(body('markSent')));
+  ok('shape', '40-resume.js: persistUnitState refuses to write after a failed read', /^\{[\s\S]{0,300}?if \(_resumeReadFailed\)[\s\S]{0,160}return false;/.test(body('persistUnitState')) && body('persistUnitState').indexOf('_resumeReadFailed') < body('persistUnitState').indexOf('saveState720'));
+  ok('shape', '40-resume.js: scheduleResumeSave and flushResumeSave are closed after a failed read',
+    /^\{\s*if \(!RESUME_ENABLED \|\| !_resumeReady \|\| _restoring \|\| _resumeReadFailed\) return;/.test(body('scheduleResumeSave'))
+    && /^\{\s*if \(!RESUME_ENABLED \|\| !_resumeReady \|\| _restoring \|\| _resumeReadFailed\) return;/.test(body('flushResumeSave')));
+  ok('shape', '50-loader.js: stage A keeps the cover after a failed read; stage B retries once and keeps the writes closed otherwise',
+    /if \(!_payload && !_resumeReadFailed\) dropBootCover\(\);/.test(loader) && /if \(_resumeReadFailed\) \{\s*_saved = readUnitState\(\);/.test(loader)
+    && /_resumeReady = !_resumeReadFailed;/.test(loader));
+  ok('shape', '50-loader.js: a screen reached during the boot window is saved once stage B is done',
+    /if \(!_resumed && currentScreen !== 0\) \{ try \{ scheduleResumeSave\(\); \}/.test(loader));
+  const CDN720 = (/var CDN = '([^']+)'/.exec(loader) || [])[1];
+  for (const p of PARTS) {
+    const h = html[p];
+    ok(p, 'the inline net raises __resumeInFlight itself on a Kata launch (C1)',
+      /if \(\/\[\?&\]registration=\/\.test\(location\.search\)\) window\.__resumeInFlight = true;\s*var t0 = Date\.now\(\);/.test(h)
+      && /__resumeInFlight && Date\.now\(\) - t0 < 6000/.test(h) && /setTimeout\(tick, 800\)/.test(h));
+    const pre = [...h.matchAll(/<link rel="preload" as="script" fetchpriority="high" href="([^"]+)">/g)].map(m => m[1]);
+    ok(p, 'head preloads xapiwrapper.min.js and the loader\'s resume library, no ?v=, no crossorigin (C2)',
+      !!CDN720 && letter && pre.join() === [CDN720 + 'xapiwrapper.min.js', CDN720 + 'xapi-720-' + letter[1] + '.js'].join()
+      && !/<link rel="preload"[^>]*crossorigin/.test(h) && h.indexOf('rel="preload"') < h.indexOf('</head>'), JSON.stringify(pre));
+    ok(p, 'head preconnects to Kata (C2)', /<link rel="preconnect" href="https:\/\/kata\.cet\.ac\.il">/.test(h.slice(0, h.indexOf('</head>'))));
+    const landAt = h.indexOf('<section class="screen active"'), landEnd = h.indexOf('</section>', landAt);
+    const heavy = [...h.matchAll(/<img\b[^>]*>/g)].filter(m => /\ssrc="(assets\/|\.\.\/unit-assets\/img\/[^"]+\.png")/.test(m[0]));
+    const eagerOff = heavy.filter(m => !(m.index > landAt && m.index < landEnd) && !/loading="lazy"/.test(m[0]));
+    ok(p, 'every assets/ (and unit-assets png) image off the landing screen is loading="lazy" (C3)', eagerOff.length === 0, eagerOff.map(m => m[0].slice(0, 80)).join(' | '));
+    ok(p, 'no landing-screen image is lazy', !heavy.some(m => m.index > landAt && m.index < landEnd && /loading="lazy"/.test(m[0])));
+    const offVideos = [...h.matchAll(/<video\b[^>]*\bautoplay\b[^>]*>[\s\S]*?<\/video>/g)].filter(m => !(m.index > landAt && m.index < landEnd));
+    ok(p, 'no hidden autoplay <video> carries an inline src (C4)', offVideos.every(m => !/<(video|source)\b[^>]*\ssrc="/.test(m[0])));
+  }
+}
 ok('identity', 'RESUME_ENABLED is on', /var RESUME_ENABLED = true;/.test(ident));
 ok('identity', 'DEV_NAV needs ?dev=1 AND no ?registration', /DEV_NAV = _devQ\.get\('dev'\) === '1' && !_devQ\.has\('registration'\)/.test(ident));
 const css = read(path.join(BASE, 'unit-css', '25-report.css'));
@@ -266,6 +308,93 @@ for (const p of PARTS) {
 for (const f of fs.readdirSync(path.join(BASE, 'unit-css'))) scanRefs(path.join(BASE, 'unit-css', f), path.join(BASE, 'unit-css'));
 ok('assets', 'every literal asset path resolves with exact case (' + refs + ' refs)', broken.length === 0 && refs > 150, broken.slice(0, 5).join('; '));
 
+/* ══════════════ 6b. result.response format (MOE mail 19.10.26; MOE monday 05.11.26) ══════════════
+   Kata compares result.response to the question's correctXapiResponsesPattern, so the layer in
+   unit-js/20-xapi.js must turn the metadata's own correct answer into exactly that string, and every
+   call site must hand the layer something it can resolve to a metadata entry. */
+section('6b. result.response format');
+{
+  const vm = require('vm');
+  const sandbox = { window: {}, console: { warn: (...a) => warns.push(a.join(' ')), error: () => {}, log: () => {} },
+                    XAPI_COMP_SLUG: '', XAPI_COMP_ID: '' };
+  const warns = [];
+  vm.createContext(sandbox);
+  vm.runInContext(unitJs['20-xapi.js'], sandbox);
+  const HAS_LAYER = ['xapiResponse', 'xapiQMeta', '_xapiNorm'].every(f => typeof sandbox[f] === 'function');
+  ok('unit', '20-xapi.js carries the response layer (xapiResponse, xapiQMeta)', HAS_LAYER);
+  if (!HAS_LAYER) sandbox.xapiResponse = sandbox.xapiQMeta = () => ({ response: null, answers: [] }), sandbox._xapiNorm = s => s;
+  /* Known open item, deferred with the board's metadata pass: 01-007/q2 is a 4-blank sentence still
+     declared fill-in, with a pattern ("1: כלי, 2: …") no response format produces. It becomes
+     performance (stepId[.]value[,]…) when the metadata changes; the call site already passes values. */
+  const KNOWN = { '01-007/q2': 1 };
+  for (const p of PARTS) {
+    if (!meta[p]) continue;
+    sandbox.window.METADATA = meta[p];
+    sandbox.XAPI_COMP_SLUG = UNIT + '-' + p;
+    sandbox.XAPI_COMP_ID = PREFIX + UNIT + '-' + p + '/';
+    for (const sc of meta[p].subContent || []) {
+      const item = sc.id.replace(/\/$/, '').split('-').pop();
+      for (const q of sc.questions || []) {
+        const qKey = q.questionId.replace(/\/$/, '').split('/').pop();
+        const pat = q.correctXapiResponsesPattern;
+        ok(p, item + '/' + qKey + ': metadata carries correctXapiResponsesPattern (Kata replaces the whole list on send)', Array.isArray(pat) && pat.length === 1);
+        if (!Array.isArray(pat) || KNOWN[p + '-' + item + '/' + qKey]) continue;
+        const ca = q.correctAnswers || [];
+        const spec = { 'choice': { choices: ca }, 'matching': { pairs: ca }, 'sequencing': { order: ca },
+                       'true-false': { value: ca[0] }, 'numeric': { value: ca[0] }, 'fill-in': { values: ca } }[q.questionType] || { text: ca[0] };
+        warns.length = 0;
+        const r = sandbox.xapiResponse(item, qKey, spec);
+        ok(p, item + '/' + qKey + ' (' + q.questionType + '): the correct answer formats to the pattern, with no warning',
+          r.response === pat[0] && !warns.length, JSON.stringify(r.response) + ' vs ' + JSON.stringify(pat[0]) + (warns.length ? ' / ' + warns[0] : ''));
+      }
+    }
+  }
+  /* call sites: the retired free-text joiners never come back */
+  const allCode = Object.values(unitJs).join('\n') + PARTS.map(p => src[p]).join('\n');
+  ok('unit', 'no retired joiner (xapiZoneAnswer / xapiFieldsAnswer / xapiMultiAnswer) defined or called', !/xapi(Zone|Fields|Multi)Answer\s*\(/.test(stripComments(allCode)));
+  for (const p of PARTS) {
+    const calls = stripComments(src[p]).split('xapiAnswered(').slice(1).map(s => s.slice(0, s.indexOf(';')));
+    ok(p, 'no xapiAnswered call joins its answer with " | " or ", "', calls.every(c => !/\.join\(\s*'(\s*\|\s*|,\s*)'\s*\)/.test(c)), calls.find(c => /\.join\(/.test(c)));
+  }
+  /* MOE monday 05.11.26 items, pinned */
+  ok('02', '001 hotspot passes the option index (its visible text is only the letter)', /xapiAnswered\('001', 'q1'[\s\S]{0,120}choices: \[\['a', 'b', 'c'\]\.indexOf\(s16qSelected\)\]/.test(src['02']));
+  ok('02', '002 q2 true-false passes a boolean value', /xapiAnswered\('002', 'q2', bRight, s17qLast, \{ value: s17qSelectedParts\.b === 'yes' \}\)/.test(src['02']));
+  ok('05', 'the S3 video stays on the open item 002 (map and YouTube report)', parseMap(src['05'])[3] === '002' && /xapiYouTubeState\(e, '002'\)/.test(src['05']) && !/xapiYouTubeState\(e, '001'\)/.test(src['05']));
+  ok('01', 'S6 confirmed choice reports selected / learning-type (advanceFromS6, not the card click)',
+    /function advanceFromS6\(\) \{[^}]*xapiSelectedLearningType\(s6Selected\)/.test(src['01']) && !/function selectOptionS6[\s\S]*?\n\}/.exec(src['01'])[0].includes('xapiSelectedLearningType'));
+  {
+    const lp = /var XAPI_LEARNING_PATHS = (\{[\s\S]*?\});/.exec(src['01']);
+    const paths = lp ? vm.runInNewContext('(' + lp[1] + ')') : {};
+    const fmt = sfx => ((meta['01'].subContent || []).find(s => s.id.replace(/\/$/, '').endsWith('-' + sfx)) || {}).mediaFormat;
+    ok('01', 'XAPI_LEARNING_PATHS: both S6 paths, mediaFormat = the item\'s mediaFormat in metadata',
+      paths['scratch-card'] && paths['escape-room'] && Object.values(paths).every(v => v.mediaFormat === fmt(v.item)), JSON.stringify(paths));
+  }
+  ok('06', 'the recipe image alt text says water, as the image does (MOE monday 05.11.26)', !/كوب واحد من العصير/.test(html['06']) && (html['06'].match(/كوب واحد من الماء/g) || []).length === 2);
+  /* every option a choice call site can send resolves to a metadata answer (needs jsdom to parse) */
+  if (jsdomMod) {
+    const { JSDOM } = jsdomMod;
+    const SITES = [
+      ['01', '002', 'q1', '#s1 .scq-opt'], ['01', '006', 'q1', '#s5 .s5q-card'], ['01', '007', 'q1', '#s8 .s8q-hotspot'], ['01', '009', 'q1', '#s15 .scq-opt'],
+      ['01', '004', 'q1', '.s3ddq-target-label', 'target'], ['01', '008', 'q1', '.s12ddq-card-text'],
+      ['02', '002', 'q1', '#s2 .scq-opt[data-part="a"]'], ['02', '003', 'q1', '#s3 .scq-opt'], ['02', '004', 'q1', '#s4 .s5q-card'], ['02', '005', 'q1', '#s5 .scq-opt'],
+      ['03', '001', 'q1', '#s1 .s5q-card'], ['03', '002', 'q1', '#s2 .s5q-card'], ['03', '003', 'q2', '#s3dd-list .mdq-option'], ['03', '004', 'q1', '#s5 .scq-opt'],
+      ['05', '001', 'q1', '#s1 .scq-opt'], ['05', '002', 'q1', '#s2 .scq-opt'],
+      ['06', '001', 'q1', '#s2 .scq-opt'], ['06', '001', 'q2', '#s3 .scq-opt'], ['06', '001', 'q3', '#s4 .scq-opt'], ['06', '001', 'q4', '#s5 .s5q-card'],
+      ['07', '001', 'q3', '#s4 .scq-opt'], ['07', '001', 'q4', '#s5 .scq-opt']];
+    for (const [p, item, qKey, sel, sub] of SITES) {
+      const w = new JSDOM(html[p]).window;
+      sandbox.window.METADATA = meta[p]; sandbox.XAPI_COMP_SLUG = UNIT + '-' + p; sandbox.XAPI_COMP_ID = PREFIX + UNIT + '-' + p + '/';
+      const m = sandbox.xapiQMeta(item, qKey);
+      const pool = sub ? (m.answers || {})[sub] || [] : m.answers || [];
+      const els = [...w.document.querySelectorAll(sel)];
+      const miss = els.map(el => sandbox.xapiAnswerText(el) || el.getAttribute('aria-label') || '')
+                      .filter(t => !pool.some(a => sandbox._xapiNorm(a) === sandbox._xapiNorm(t)));
+      ok(p, item + '/' + qKey + ': every option on screen (' + sel + ') resolves to a metadata answer', els.length > 1 && !miss.length, JSON.stringify(miss));
+      w.close();
+    }
+  } else skipped.push('option-text scan (jsdom not found)');
+}
+
 /* ══════════════ 7. runtime (jsdom + the local stub) ══════════════ */
 section('7. runtime (jsdom)');
 async function boot(p, query) {
@@ -317,7 +446,7 @@ async function runtime() {
     off.dom.window.close();
 
     /* (b) with the stub: statement flow over every screen boundary, driven only by the map */
-    const on = await boot(p, '?xapiLib=../_test/xapi-720-k.js&registration=verify-' + p + '&resetState');
+    const on = await boot(p, '?xapiLib=../_test/xapi-720-l.js&registration=verify-' + p + '&resetState');
     const w = on.w;
     const ready = await on.until(() => w.__stmts && w.eval('_resumeReady') === true && w.__stmts().length > 0, 8000);
     ok(p, 'stub: the loader boots and resume becomes ready', ready);
@@ -362,7 +491,7 @@ async function runtime() {
      in-memory aggregate that a reload wipes, so the content must supply it from the restored
      XAPI_Q_RESULTS. U1's walk only passed by coincidence (1/2 after the reload = 2/4 overall). */
   const o8 = async (p, before, after, item) => {
-    const lib = '?xapiLib=../_test/xapi-720-k.js&registration=o8-' + p + '-' + Math.random().toString(36).slice(2) + '&resetState';
+    const lib = '?xapiLib=../_test/xapi-720-l.js&registration=o8-' + p + '-' + Math.random().toString(36).slice(2) + '&resetState';
     const a = await boot(p, lib);
     await a.until(() => a.w.__stmts && a.w.eval('_resumeReady') === true, 8000);
     /* answered the way the part's handlers do: 06 also records the section in peakResults (its score) */
@@ -402,7 +531,7 @@ async function runtime() {
   ok('01', '007: scratch path, q1 wrong -> success false, 0.5 (as before)', is(o, false, 0.5), res(o));
   /* (e) MOE 2026-10-08: the challenge (05) reports its real score; success only at >= 60% of the
      2 declared questions (001 q1, 002 q1). No gate: the learner continues either way. */
-  const ch = await boot('05', '?xapiLib=../_test/xapi-720-k.js&registration=thr-05-' + Math.random().toString(36).slice(2) + '&resetState');
+  const ch = await boot('05', '?xapiLib=../_test/xapi-720-l.js&registration=thr-05-' + Math.random().toString(36).slice(2) + '&resetState');
   await ch.until(() => ch.w.__stmts && ch.w.eval('_resumeReady') === true, 8000);
   const thr = JSON.parse(ch.w.eval('(function(){ var orig = xapiEndComponent, out = [];' +
     ' xapiEndComponent = function (r) { out.push(r); };' +
@@ -412,6 +541,92 @@ async function runtime() {
   ch.dom.window.close();
   ok('05', 'challenge: success only at >= 60%, real score (0/2, 1/2 fail; 2/2 passes)',
     thr.length === 3 && thr.map(r => r.success + ':' + r.score.scaled).join(',') === 'false:0,false:0.5,true:1', JSON.stringify(thr));
+  /* (f) MOE monday 05.11.26: the S6 learning-path choice reports 'selected' / learning-type, on every
+     confirmed choice (rule of 04.11.26 — no ledger), never on the card click. */
+  const sl = await boot('01', '?xapiLib=../_test/xapi-720-l.js&registration=sel-01-' + Math.random().toString(36).slice(2) + '&resetState');
+  await sl.until(() => sl.w.__stmts && sl.w.eval('_resumeReady') === true, 8000);
+  const sel = () => sl.w.__stmts().filter(s => s.verb === 'selected');
+  sl.w.goTo(6);
+  sl.w.selectOptionS6(sl.w.document.querySelector('#s6 .option-card[data-value="escape-room"]'));
+  const afterClick = sel().length;
+  sl.w.advanceFromS6();
+  sl.w.goTo(6);
+  sl.w.selectOptionS6(sl.w.document.querySelector('#s6 .option-card[data-value="scratch-card"]'));
+  sl.w.advanceFromS6();
+  const s = sel();
+  sl.dom.window.close();
+  ok('01', 'selected: nothing on the card click; one statement per confirmed choice, response = mediaFormat, category learning-type',
+    afterClick === 0 && s.length === 2 && s.every(x => x.objectType === 'onlinelesson' && x.result && x.result.response === 'interactive-content' && x.opts && x.opts.category === 'learning-type'),
+    JSON.stringify(s.map(x => [x.objectType, x.result, x.opts])));
+
+  /* (g) write-guard (BOOT-AND-RESUME-HARDENING-2026-11-03.md §2.6 a–j): NO write may replace the saved
+     payload before the restore. Kata's reproduction (mass-measure-01, 03.11.26): saved screen 2; the
+     learner acted before the restore arrived; the stage-B drain persisted a live capture over the saved
+     payload. Three doors: the drain, markSent, a failed read. On the pre-fix tree (3db1f30) b-e and g-j
+     fail (a passes there: setUnitCharacter already queued the pick); proven 2026-11-05. */
+  const guard = async () => {
+    const G = await boot('01', '');
+    await new Promise(r => setTimeout(r, 300));
+    G.w.eval('(function(){ window.__store = null; window.__debounced = null;' +
+      ' window.loadState720 = function () { return window.__store ? JSON.parse(JSON.stringify(window.__store)) : null; };' +
+      ' window.saveState720 = function (id, doc) { window.__store = JSON.parse(JSON.stringify(doc)); return true; };' +
+      ' window.saveState720Debounced = function (id, doc) { window.__debounced = doc; };' +   // by reference, as the library holds it
+      ' window.stateLastResult720 = function () { return { op: "load", status: 200, ok: true, reason: "ok" }; };' +
+      ' window.sendStatement720 = function () {}; _resumeReady = false; _unitState = null;' +
+      ' window.__store = { v: 5, component: currentPartSlug(), payload: { currentScreen: 2 }, done: {}, doneItems: {},' +
+      '   hints: {}, picks: {}, ui: { character: "character-1" }, results: {} }; })()');
+    G.stored = () => JSON.parse(G.w.eval('JSON.stringify(window.__store)'));
+    G.end = async () => { await new Promise(r => setTimeout(r, 50)); G.dom.window.close(); };
+    return G;
+  };
+  let G = await guard();
+  G.w.eval('readUnitState(); setUnitCharacter("character-2"); goTo(1);');
+  ok('write-guard', 'a: a pick + navigation before stage B writes nothing',
+    G.stored().payload.currentScreen === 2 && G.w.eval('_pendingProfile && _pendingProfile.character') === 'character-2', JSON.stringify(G.stored()));
+  G.w.eval('_resumeReady = true; drainPendingUnitState();');
+  ok('write-guard', 'b: the drain persists the document AS READ: saved payload intact, character updated',
+    G.stored().payload.currentScreen === 2 && G.stored().ui.character === 'character-2' && G.stored().component === UNIT + '-01', JSON.stringify(G.stored()));
+  G.w.eval('applyExecutionState(_unitState.payload);');
+  ok('write-guard', 'c: the restore lands on the saved screen after the drain', G.w.eval('currentScreen') === 2);
+  ok('write-guard', 'd: the debounced document (held by reference) still carries the saved payload',
+    G.w.eval('window.__debounced ? window.__debounced.payload.currentScreen : 2') === 2);
+  await G.end();
+  G = await guard();
+  G.w.eval('readUnitState(); goTo(1); markSent("doneItems", "x");');
+  ok('write-guard', 'e: markSent before stage B marks in memory but writes nothing',
+    G.stored().payload.currentScreen === 2 && !G.stored().doneItems.x && G.w.eval('_unitState.doneItems.x') === true, JSON.stringify(G.stored()));
+  G.w.eval('_resumeReady = true; flushResumeSave();');
+  ok('write-guard', 'f: the key marked in memory rides the next save', G.stored().doneItems.x === true);
+  await G.end();
+  G = await guard();
+  G.w.eval('window.__realLoad = window.loadState720; window.loadState720 = function () { return null; };' +
+    ' window.stateLastResult720 = function () { return { op: "load", status: 500, ok: false, reason: "http-500" }; }; readUnitState();');
+  ok('write-guard', 'g: a read that fails (not a 404) is flagged, not taken as a fresh document',
+    G.w.eval("typeof _resumeReadFailed !== 'undefined' ? _resumeReadFailed : 'absent'") === true && G.w.eval('_unitState.payload') === null);
+  G.w.eval('_resumeReady = true; window.__p = persistUnitState(_unitState); flushResumeSave(); markSent("done", "y"); goTo(1); scheduleResumeSave(); flushResumeSaveOnLeave();');
+  ok('write-guard', 'h: after a failed read every write (leave save included) is refused and the stored document is untouched',
+    G.w.eval('window.__p') === false && G.stored().payload.currentScreen === 2 && G.stored().done.y === undefined && G.w.eval('window.__debounced') === null, JSON.stringify(G.stored()));
+  G.w.eval('window.loadState720 = window.__realLoad; window.stateLastResult720 = function () { return { op: "load", status: 200, ok: true, reason: "ok" }; }; readUnitState();');
+  ok('write-guard', 'i: a read that succeeds afterwards clears the flag and brings the payload back',
+    G.w.eval("typeof _resumeReadFailed !== 'undefined' ? _resumeReadFailed : 'absent'") === false && G.w.eval('_unitState.payload.currentScreen') === 2);
+  G.w.eval('window.loadState720 = function () { return null; }; window.stateLastResult720 = function () { return { op: "load", status: 404, ok: true, reason: "absent" }; }; readUnitState();');
+  ok('write-guard', 'j: a 404 ("nothing saved yet") is NOT a failed read', G.w.eval("typeof _resumeReadFailed !== 'undefined' ? _resumeReadFailed : 'absent'") === false && G.w.eval('_unitState.payload') === null);
+  await G.end();
+
+  /* (h) the leave save goes through -l's saveState720OnLeave (percent-03 8b63a4f), and the unit still
+     runs on -k, where that function does not exist */
+  for (const [lib, hasLeave] of [['xapi-720-l.js', true], ['xapi-720-k.js', false]]) {
+    const L = await boot('02', '?xapiLib=../_test/' + lib + '&registration=leave-' + Math.random().toString(36).slice(2) + '&resetState');
+    const up = await L.until(() => L.w.__stmts && L.w.eval('_resumeReady') === true, 8000);
+    L.w.goTo(3);
+    L.w.dispatchEvent(new L.w.Event('pagehide'));
+    const leaves = typeof L.w.__leaveWrites === 'function' ? L.w.__leaveWrites() : null;
+    const doc = L.w.__state();
+    ok('02', 'leave on ' + lib + ': ' + (hasLeave ? 'pagehide saves through saveState720OnLeave, current screen' : 'falls back to saveState720, current screen'),
+      up && (hasLeave ? leaves && leaves.length >= 1 && leaves[leaves.length - 1].cs === 3 : leaves === null) && doc && doc.payload && doc.payload.currentScreen === 3,
+      JSON.stringify({ leaves, cs: doc && doc.payload && doc.payload.currentScreen }));
+    L.dom.window.close();
+  }
 }
 
 /* ══════════════ 8. Arabic build ══════════════

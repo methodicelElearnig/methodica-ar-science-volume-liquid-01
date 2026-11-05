@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 6,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "evaluating-and-justifying"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["evaluating-and-justifying"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 8,
+  "createdAt": "2026-11-02T14:12:55.499248Z",
+  "updatedAt": "2026-11-02T14:12:55.499270Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-06/methodica-ar-science-volume-liquid-01-06-001/",
@@ -32,29 +28,33 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-06/methodica-ar-science-volume-liquid-01-06-001/q1",
           "questionType": "choice",
           "questionText": "بحسب جدول التحويل القياسي، معطى: 1 \"كوب\" = 240 ملل؛ 1 \"ملعقة صغيرة\" = 5 ملل؛ 1 \"ملعقة كبيرة\" = 15 ملل. وجدت ريهام في الخزانة وصفة تركتها جدّتها من عام 1950. فيما يلي جزء منها: بطاقة عليها وصفة قديمة بخط يد: كعكة شوكولاتة – كوب واحد من العصير، ملعقتان صغيرتان من السكر، ملعقة كبيرة من الزيت. وجد يوسف وصفة حديثة على الإنترنت. فيما يلي جزء منها: وصفة إلكترونية لكعكة شوكولاتة: 250 ملل ماء، 10 غرام سكر، 15 ملل زيت. البند أ: إذا استخدمنا وصفة الجدة، كم ملل من الماء سنضع؟",
-          "answers": [
-            "240 ملل",
-            "250 ملل",
-            "480 ملل",
-            "5 ملل"
-          ],
-          "correctAnswers": [
-            "240 ملل"
-          ]
+          "answers": ["240 ملل", "250 ملل", "480 ملل", "5 ملل"],
+          "correctAnswers": ["240 ملل"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "240 ملل", "description": "240 ملل"},
+              {"id": "250 ملل", "description": "250 ملل"},
+              {"id": "480 ملل", "description": "480 ملل"},
+              {"id": "5 ملل", "description": "5 ملل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["240 ملل"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-06/methodica-ar-science-volume-liquid-01-06-001/q2",
           "questionType": "choice",
           "questionText": "البند ب: هل الوصفة من عام 1950 والوصفة الحديثة ستُنتِجان كعكة متطابقة أم مختلفة بشكل ملحوظ؟",
-          "answers": [
-            "متطابقة تمامًا",
-            "متطابقة تقريبًا",
-            "مختلفة بشكل ملحوظ",
-            "لا يمكن المعرفة مسبقًا"
-          ],
-          "correctAnswers": [
-            "متطابقة تقريبًا"
-          ]
+          "answers": ["متطابقة تمامًا", "متطابقة تقريبًا", "مختلفة بشكل ملحوظ", "لا يمكن المعرفة مسبقًا"],
+          "correctAnswers": ["متطابقة تقريبًا"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "متطابقة تمامًا", "description": "متطابقة تمامًا"},
+              {"id": "متطابقة تقريبًا", "description": "متطابقة تقريبًا"},
+              {"id": "مختلفة بشكل ملحوظ", "description": "مختلفة بشكل ملحوظ"},
+              {"id": "لا يمكن المعرفة مسبقًا", "description": "لا يمكن المعرفة مسبقًا"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["متطابقة تقريبًا"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-06/methodica-ar-science-volume-liquid-01-06-001/q3",
@@ -66,9 +66,16 @@
             "لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة",
             "لأن القانون يفرض ذلك اليوم"
           ],
-          "correctAnswers": [
-            "لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة"
-          ]
+          "correctAnswers": ["لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "لأن الناس في عام 1950 كانوا يعرفون أقل مما نعرفه اليوم", "description": "لأن الناس في عام 1950 كانوا يعرفون أقل مما نعرفه اليوم"},
+              {"id": "لأن الشباب غير معتادين على الطبخ كما كان في الماضي", "description": "لأن الشباب غير معتادين على الطبخ كما كان في الماضي"},
+              {"id": "لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة", "description": "لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة"},
+              {"id": "لأن القانون يفرض ذلك اليوم", "description": "لأن القانون يفرض ذلك اليوم"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["لكي يحصل الشخص الذي يحضّر الكعكة بكوب مختلف على نفس الكعكة"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-06/methodica-ar-science-volume-liquid-01-06-001/q4",
@@ -80,9 +87,16 @@
             "ملعقة مطبخ عادية جيدة بما يكفي",
             "دورق بسِعة 500 ملل – سريع وسهل"
           ],
-          "correctAnswers": [
-            "مخبار مدرّج بسِعة 50 ملل"
-          ]
+          "correctAnswers": ["مخبار مدرّج بسِعة 50 ملل"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "مخبار مدرّج بسِعة 50 ملل", "description": "مخبار مدرّج بسِعة 50 ملل"},
+              {"id": "ملعقة قياس طبية سِعتها 5 ملل: نقيس 3 مرات للوصول إلى 15 ملل", "description": "ملعقة قياس طبية سِعتها 5 ملل: نقيس 3 مرات للوصول إلى 15 ملل"},
+              {"id": "ملعقة مطبخ عادية جيدة بما يكفي", "description": "ملعقة مطبخ عادية جيدة بما يكفي"},
+              {"id": "دورق بسِعة 500 ملل – سريع وسهل", "description": "دورق بسِعة 500 ملل – سريع وسهل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["مخبار مدرّج بسِعة 50 ملل"]
         }
       ]
     }

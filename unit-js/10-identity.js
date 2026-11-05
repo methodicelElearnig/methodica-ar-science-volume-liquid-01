@@ -43,7 +43,8 @@ function shortId(u) { return String(u || '').replace(/\/+$/, '').split('/').pop(
    the four hooks in every part's js/main.js, the boot cover in every index.html. A part whose
    hooks are missing is switched back off by 90-boot.js rather than failing on every save.
    ⚠️ This flag also changes reporting, not only restoring: true makes 50-loader.js load
-   xapi-720-k.js (the build with the State layer) instead of xapi-720-i.js. Once it is on, do not
+   xapi-720-l.js (the build with the State layer and the leave save) instead of xapi-720-i.js, and every
+   part's <head> preloads that exact URL. Once it is on, do not
    switch it off to debug a restore — use ?resetState. */
 var RESUME_ENABLED = true;
 

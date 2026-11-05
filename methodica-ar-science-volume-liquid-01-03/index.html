@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>وحدة تعليمية — قياس حجم السائل وأدوات القياس · الجزء 03</title>
+  <!-- The shared xAPI library is fetched by unit-js/50-loader.js at the END of the body, i.e. after
+       the parser has already queued every image below; measured live (mass-measure-01), its request
+       did not go out until the last image had finished, which put the resume restore 20-45 s behind
+       a slow line (2026-11-03). Preloading it from the head puts it FIRST in the queue. The href must
+       equal what 50-loader.js builds (no ?v=, no crossorigin) or the browser fetches it twice;
+       the library letter here changes together with LIB720 there (the harness asserts it). -->
+  <link rel="preload" as="script" fetchpriority="high" href="https://lomdot.education.gov.il/metodica/720active/common/xapiwrapper.min.js">
+  <link rel="preload" as="script" fetchpriority="high" href="https://lomdot.education.gov.il/metodica/720active/common/xapi-720-l.js">
+  <link rel="preconnect" href="https://kata.cet.ac.il">
   <link rel="stylesheet" href="../unit-css/base.css?v=3">
   <link rel="stylesheet" href="../unit-css/scq.css?v=2">
   <link rel="stylesheet" href="../unit-css/img-zoom.css?v=1">
@@ -21,6 +30,12 @@
 <div id="boot-cover" style="position:fixed;inset:0;z-index:9999;background:#fff"></div>
 <script>
 (function () {
+  /* A Kata launch (registration in the query) may have a document to restore: raise the
+     flag HERE, before any script is fetched. bootXAPI raises it too, but it runs from the
+     last script tag, and on a cold cache those scripts arrive after the 800 ms below — so
+     the cover used to drop before the flag existed, exposing screen 0 for the whole wait
+     (2026-11-03). Without a registration (local, dev) the 800 ms behaviour is unchanged. */
+  if (/[?&]registration=/.test(location.search)) window.__resumeInFlight = true;
   var t0 = Date.now();
   function tick() {
     var c = document.getElementById('boot-cover');
@@ -112,7 +127,7 @@
            per the S20 dog.png precedent in part 01. -->
       <div class="s5q-header" data-reveal="1">
         <p class="s5q-body">ما هي الأداة المناسبة لقياس كمية العصير في الكوب المملوء بعصير البرتقال بدقة؟<br><strong>اضغطوا على الإجابة الصحيحة‎.</strong></p>
-        <img class="s1q-img" src="assets/img/OrangeJuice.png" alt="كوب مملوء بعصير البرتقال">
+        <img loading="lazy" class="s1q-img" src="assets/img/OrangeJuice.png" alt="كوب مملوء بعصير البرتقال">
       </div>
 
       <!-- Image cards, right→left: מאזניים דיגיטליים · סרגל · כף · משורה.
@@ -124,7 +139,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="cylinder" onclick="s1qSelect('cylinder')">
           <span class="s5q-card-frame">
-            <img src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
+            <img loading="lazy" src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
           </span>
           <span class="s5q-card-label">مخبار مدرّج</span>
         </button>
@@ -132,7 +147,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="spoon" onclick="s1qSelect('spoon')">
           <span class="s5q-card-frame">
-            <img src="../unit-assets/img/spoon.png" alt="ملعقة">
+            <img loading="lazy" src="../unit-assets/img/spoon.png" alt="ملعقة">
           </span>
           <span class="s5q-card-label">ملعقة</span>
         </button>
@@ -140,7 +155,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="ruler" onclick="s1qSelect('ruler')">
           <span class="s5q-card-frame">
-            <img src="assets/img/ruler.png" alt="مسطرة">
+            <img loading="lazy" src="assets/img/ruler.png" alt="مسطرة">
           </span>
           <span class="s5q-card-label">مسطرة</span>
         </button>
@@ -148,7 +163,7 @@
         <button class="s5q-card" type="button" role="radio" aria-checked="false"
                 data-id="scale" onclick="s1qSelect('scale')">
           <span class="s5q-card-frame">
-            <img src="assets/img/DigitalWeight.png" alt="ميزان رقمي">
+            <img loading="lazy" src="assets/img/DigitalWeight.png" alt="ميزان رقمي">
           </span>
           <span class="s5q-card-label">ميزان رقمي</span>
         </button>
@@ -271,7 +286,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="cylinder" onclick="s2mcToggle('cylinder')">
             <span class="s5q-card-frame">
-              <img src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
+              <img loading="lazy" src="../unit-assets/img/MeasuringCylinder.png" alt="مخبار مدرّج">
             </span>
             <span class="s5q-card-label">مخبار مدرّج</span>
           </button>
@@ -279,7 +294,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="ruler" onclick="s2mcToggle('ruler')">
             <span class="s5q-card-frame">
-              <img src="assets/img/ruler.png" alt="مسطرة">
+              <img loading="lazy" src="assets/img/ruler.png" alt="مسطرة">
             </span>
             <span class="s5q-card-label">مسطرة</span>
           </button>
@@ -287,7 +302,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="scale" onclick="s2mcToggle('scale')">
             <span class="s5q-card-frame">
-              <img src="assets/img/DigitalWeight.png" alt="ميزان رقمي">
+              <img loading="lazy" src="assets/img/DigitalWeight.png" alt="ميزان رقمي">
             </span>
             <span class="s5q-card-label">ميزان رقمي</span>
           </button>
@@ -297,7 +312,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="stopwatch" onclick="s2mcToggle('stopwatch')">
             <span class="s5q-card-frame">
-              <img src="assets/img/StopWatch.png" alt="ساعة توقيت">
+              <img loading="lazy" src="assets/img/StopWatch.png" alt="ساعة توقيت">
             </span>
             <span class="s5q-card-label">ساعة توقيت</span>
           </button>
@@ -305,7 +320,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="measuringcup" onclick="s2mcToggle('measuringcup')">
             <span class="s5q-card-frame">
-              <img src="../unit-assets/img/ChemicalBeaker2.png" alt="كوب قياس">
+              <img loading="lazy" src="../unit-assets/img/ChemicalBeaker2.png" alt="كوب قياس">
             </span>
             <span class="s5q-card-label">كوب قياس</span>
           </button>
@@ -313,7 +328,7 @@
           <button class="s5q-card" type="button" role="checkbox" aria-checked="false"
                   data-id="syringe" onclick="s2mcToggle('syringe')">
             <span class="s5q-card-frame">
-              <img src="assets/img/syringe.png" alt="محقنة">
+              <img loading="lazy" src="assets/img/syringe.png" alt="محقنة">
             </span>
             <span class="s5q-card-label">محقنة</span>
           </button>
@@ -569,7 +584,7 @@
                       data-zoom-alt="لوح قابل للمحو عليه نتائج قياس أمل: القياس 1 – 51 ملل، القياس 2 – 50 ملل، القياس 3 – 49 ملل">
                 <svg class="img-zoom-btn__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1C11.8661 1 15 4.13371 15 7.99902C15 11.8643 11.8661 14.998 8 14.998C4.1339 14.998 1.00002 11.8643 1 7.99902C1 4.13371 4.13389 1 8 1Z" stroke="currentColor" stroke-width="2"/><path d="M12.6221 14.188L14.2657 12.6141L19.928 18.5274C20.3626 18.9813 20.347 19.7016 19.8931 20.1362C19.4392 20.5708 18.7189 20.5552 18.2843 20.1013L12.6221 14.188Z" fill="currentColor"/></svg>
               </button>
-              <img src="assets/img/Adi-Board.png"
+              <img loading="lazy" src="assets/img/Adi-Board.png"
                    alt="لوح قابل للمحو عليه نتائج قياس أمل: القياس 1 – 51 ملل، القياس 2 – 50 ملل، القياس 3 – 49 ملل"
                    onerror="this.style.display='none'">
             </div>
@@ -585,7 +600,7 @@
                       data-zoom-alt="لوح قابل للمحو عليه نتائج قياس مها: القياس 1 – 30 ملل، القياس 2 – 50 ملل، القياس 3 – 70 ملل">
                 <svg class="img-zoom-btn__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1C11.8661 1 15 4.13371 15 7.99902C15 11.8643 11.8661 14.998 8 14.998C4.1339 14.998 1.00002 11.8643 1 7.99902C1 4.13371 4.13389 1 8 1Z" stroke="currentColor" stroke-width="2"/><path d="M12.6221 14.188L14.2657 12.6141L19.928 18.5274C20.3626 18.9813 20.347 19.7016 19.8931 20.1362C19.4392 20.5708 18.7189 20.5552 18.2843 20.1013L12.6221 14.188Z" fill="currentColor"/></svg>
               </button>
-              <img src="assets/img/Almog-Board.png"
+              <img loading="lazy" src="assets/img/Almog-Board.png"
                    alt="لوح قابل للمحو عليه نتائج قياس مها: القياس 1 – 30 ملل، القياس 2 – 50 ملل، القياس 3 – 70 ملل"
                    onerror="this.style.display='none'">
             </div>
@@ -761,19 +776,19 @@
 
 </div><!-- /#app -->
 
-<script src="../unit-js/10-identity.js?v=3"></script>
-<script src="../unit-js/20-xapi.js?v=2"></script>
+<script src="../unit-js/10-identity.js?v=4"></script>
+<script src="../unit-js/20-xapi.js?v=3"></script>
 <script src="../unit-js/25-report.js?v=1"></script>
-<script src="../unit-js/40-resume.js?v=3"></script>
+<script src="../unit-js/40-resume.js?v=4"></script>
 <script src="../unit-js/45-resume-paint.js?v=1"></script>
-<script src="../unit-js/50-loader.js?v=1"></script>
+<script src="../unit-js/50-loader.js?v=2"></script>
 <script src="../unit-js/05-motion.js?v=1"></script>
 <script src="../unit-js/00-util.js?v=2"></script>
 <script src="../unit-js/30-nav.js?v=2"></script>
 <script src="../unit-js/32-navlabels.js?v=1"></script>
 <script src="../unit-js/35-popup.js?v=1"></script>
 <script src="../unit-js/38-progress.js?v=1"></script>
-<script src="js/main.js?v=13"></script>
+<script src="js/main.js?v=14"></script>
 <script src="../unit-js/90-boot.js?v=2"></script>
 </body>
 </html>

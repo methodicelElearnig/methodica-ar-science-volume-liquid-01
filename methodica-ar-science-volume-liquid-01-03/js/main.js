@@ -719,8 +719,10 @@ function s2mcCheck() {
 
   s2mcAttempts++;
   const isCorrect = s2mcSetsEqual(s2mcSelected, S2MC.correctSet);
+  /* Multi-select: the layer emits the metadata strings in answers order, joined by '[,]' — not the
+     click order (MOE monday 05.11.26). */
   xapiAnswered('002', 'q1', isCorrect, isCorrect || s2mcAttempts >= S2MC.maxAttempts,
-    xapiMultiAnswer([...s2mcSelected], id => document.querySelector('#s2 .s5q-card[data-id="' + id + '"]')));
+    { choices: [...s2mcSelected].map(id => xapiAnswerText(document.querySelector('#s2 .s5q-card[data-id="' + id + '"]'))) });
 
   if (isCorrect) {
     s2mcMarkAll('correct');

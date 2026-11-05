@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 2,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "applying-a-model-or-procedure"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["applying-a-model-or-procedure"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 12,
+  "createdAt": "2026-11-02T14:12:47.290666Z",
+  "updatedAt": "2026-11-02T14:12:47.290683Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-001/",
@@ -32,14 +28,16 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-001/q1",
           "questionType": "choice",
           "questionText": "يظهر في الصورة مخبار مدرّج يحتوي على ماء. يلتصق الماء قليلًا بالجدار، ولذلك يشكل سطح السائل انحناءً. اضغطوا على نقطة القراءة التي نقيس عندها.",
-          "answers": [
-            "أ. فوق الانحناء",
-            "ب. على مستوى الانحناء",
-            "ت. عند أدنى نقطة في الانحناء"
-          ],
-          "correctAnswers": [
-            "ت. عند أدنى نقطة في الانحناء"
-          ]
+          "answers": ["أ. فوق الانحناء", "ب. على مستوى الانحناء", "ت. عند أدنى نقطة في الانحناء"],
+          "correctAnswers": ["ت. عند أدنى نقطة في الانحناء"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "أ. فوق الانحناء", "description": "أ. فوق الانحناء"},
+              {"id": "ب. على مستوى الانحناء", "description": "ب. على مستوى الانحناء"},
+              {"id": "ت. عند أدنى نقطة في الانحناء", "description": "ت. عند أدنى نقطة في الانحناء"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["ت. عند أدنى نقطة في الانحناء"]
         }
       ]
     },
@@ -54,26 +52,25 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-002/q1",
           "questionType": "choice",
           "questionText": "قاست دنيا كمية الماء نفسها 3 مرات وحصلت على النتائج التالية: 30، 28، 32 ملل. أ. ما هو معدل القياسات الثلاثة؟",
-          "answers": [
-            "30",
-            "31",
-            "32"
-          ],
-          "correctAnswers": [
-            "30"
-          ]
+          "answers": ["30", "31", "32"],
+          "correctAnswers": ["30"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "30", "description": "30"},
+              {"id": "31", "description": "31"},
+              {"id": "32", "description": "32"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["30"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-002/q2",
           "questionType": "true-false",
           "questionText": "ب. هل القياسات موثوقة؟",
-          "answers": [
-            "نعم",
-            "لا"
-          ],
-          "correctAnswers": [
-            "نعم"
-          ]
+          "answers": ["true", "false"],
+          "correctAnswers": ["true"],
+          "xapiInteractionComponents": null,
+          "correctXapiResponsesPattern": ["true"]
         }
       ]
     },
@@ -94,9 +91,16 @@
             "النتيجتان صحيحتان ولا مشكلة في ذلك",
             "على الأرجح قياس فادي - لأن الرقم الذي حصل عليه أكبر"
           ],
-          "correctAnswers": [
-            "قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة"
-          ]
+          "correctAnswers": ["قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "قياس فادي - يمكن الرؤية بشكل أفضل من الأعلى", "description": "قياس فادي - يمكن الرؤية بشكل أفضل من الأعلى"},
+              {"id": "قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة", "description": "قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة"},
+              {"id": "النتيجتان صحيحتان ولا مشكلة في ذلك", "description": "النتيجتان صحيحتان ولا مشكلة في ذلك"},
+              {"id": "على الأرجح قياس فادي - لأن الرقم الذي حصل عليه أكبر", "description": "على الأرجح قياس فادي - لأن الرقم الذي حصل عليه أكبر"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["قياس ياسمين - القراءة على مستوى العين هي الطريقة المتّبعة"]
         }
       ]
     },
@@ -111,13 +115,15 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/methodica-ar-science-volume-liquid-01-02-004/q1",
           "questionType": "choice",
           "questionText": "علينا قياس 10 ملل من السائل. بأي أداة يمكننا قياس الكمية بدقّة أكبر؟",
-          "answers": [
-            "ماصّة",
-            "دورق بسِعة 500 ملل"
-          ],
-          "correctAnswers": [
-            "ماصّة"
-          ]
+          "answers": ["ماصّة", "دورق بسِعة 500 ملل"],
+          "correctAnswers": ["ماصّة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "ماصّة", "description": "ماصّة"},
+              {"id": "دورق بسِعة 500 ملل", "description": "دورق بسِعة 500 ملل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["ماصّة"]
         }
       ]
     },
@@ -138,9 +144,16 @@
             "دورق بسِعة 100 ملل",
             "ماصّة بسِعة 25 ملل"
           ],
-          "correctAnswers": [
-            "محقنة بسِعة 5 ملل"
-          ]
+          "correctAnswers": ["محقنة بسِعة 5 ملل"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "مخبار مدرّج بسِعة لتر واحد (1000 ملل)", "description": "مخبار مدرّج بسِعة لتر واحد (1000 ملل)"},
+              {"id": "محقنة بسِعة 5 ملل", "description": "محقنة بسِعة 5 ملل"},
+              {"id": "دورق بسِعة 100 ملل", "description": "دورق بسِعة 100 ملل"},
+              {"id": "ماصّة بسِعة 25 ملل", "description": "ماصّة بسِعة 25 ملل"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["محقنة بسِعة 5 ملل"]
         }
       ]
     }

@@ -10,16 +10,12 @@
   "masteryLevel": null,
   "order": 6,
   "depthLevel": "core-curriculum-basic",
-  "cognitiveLevels": [
-    "evaluating-and-justifying"
-  ],
-  "languages": [
-    "Arabic"
-  ],
+  "cognitiveLevels": ["evaluating-and-justifying"],
+  "languages": ["Arabic"],
   "skills": [],
-  "createdAt": "2026-10-25T00:00:00.000Z",
-  "updatedAt": "2026-10-25T00:00:00.000Z",
   "estimatedTimeInMinutes": 8,
+  "createdAt": "2026-11-02T14:12:56.530721Z",
+  "updatedAt": "2026-11-02T14:12:56.530741Z",
   "subContent": [
     {
       "id": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-07/methodica-ar-science-volume-liquid-01-07-001/",
@@ -32,24 +28,26 @@
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-07/methodica-ar-science-volume-liquid-01-07-001/q1",
           "questionType": "choice",
           "questionText": "تنتج شركة مشروبات مئات قناني العصير المكتوب على ملصقاتها - المحتوى: 750 ملل. وفق المعيار، يتراوح حجم العصير المسموح به في القنينة بين 735 و-765 ملل. اختار قسم الاستهلاك 8 قناني في المصنع، وقاس حجم العصير في كل قنينة. رقم القنينة | حجم العصير في القنينة (بالمليلتر): 1 | 745؛ 2 | 752؛ 3 | 748؛ 4 | 760؛ 5 | 749؛ 6 | 755؛ 7 | 747؛ 8 | 754. البند أ: نتائج قياس حجم العصير في القناني المختلفة بالملل: 745، 752، 748، 760، 749، 755، 747، 754. معدل حجم محتوى القناني الـ 8 ___ ملل.",
-          "answers": [
-            "748.5",
-            "751.25",
-            "755",
-            "760"
-          ],
-          "correctAnswers": [
-            "751.25"
-          ]
+          "answers": ["748.5", "751.25", "755", "760"],
+          "correctAnswers": ["751.25"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "748.5", "description": "748.5"},
+              {"id": "751.25", "description": "751.25"},
+              {"id": "755", "description": "755"},
+              {"id": "760", "description": "760"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["751.25"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-07/methodica-ar-science-volume-liquid-01-07-001/q2",
           "questionType": "numeric",
           "questionText": "البند ب: وفق المعيار، يمكن أن تحتوي القناني على حجم يتراوح بين 735 و-765 ملل من عصير البرتقال. معدل القياسات هو: 751.25 ملل. ولذلك ___ قناني من أصل 8 قناني تقع ضمن مجال المعيار.",
           "answers": [],
-          "correctAnswers": [
-            8
-          ]
+          "correctAnswers": [8],
+          "xapiInteractionComponents": null,
+          "correctXapiResponsesPattern": ["8"]
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-07/methodica-ar-science-volume-liquid-01-07-001/q3",
@@ -63,6 +61,29 @@
           ],
           "correctAnswers": [
             "تلتزم الشركة بالمعيار وفق القانون - جميع قياسات الفحص (760-745 ملل) تقع ضمن المجال المسموح به وفق المعيار (765-735 ملل)"
+          ],
+          "xapiInteractionComponents": {
+            "choices": [
+              {
+                "id": "تلتزم الشركة بالمعيار وفق القانون - المعيار المطلوب في البلاد يتراوح بين 735 ملل و-765 ملل، وهذا مجال عادل تمامًا للمستهلكين",
+                "description": "تلتزم الشركة بالمعيار وفق القانون - المعيار المطلوب في البلاد يتراوح بين 735 ملل و-765 ملل، وهذا مجال عادل تمامًا للمستهلكين"
+              },
+              {
+                "id": "تلتزم الشركة بالمعيار وفق القانون - في فحص قسم الاستهلاك تمّ قياس قيَم تتراوح بين 745 ملل و-760 ملل في القناني المختلفة",
+                "description": "تلتزم الشركة بالمعيار وفق القانون - في فحص قسم الاستهلاك تمّ قياس قيَم تتراوح بين 745 ملل و-760 ملل في القناني المختلفة"
+              },
+              {
+                "id": "تلتزم الشركة بالمعيار وفق القانون - جميع قياسات الفحص (760-745 ملل) تقع ضمن المجال المسموح به وفق المعيار (765-735 ملل)",
+                "description": "تلتزم الشركة بالمعيار وفق القانون - جميع قياسات الفحص (760-745 ملل) تقع ضمن المجال المسموح به وفق المعيار (765-735 ملل)"
+              },
+              {
+                "id": "لا تلتزم الشركة بالمعيار، لأنه تم العثور في الفحص على قنينة تحتوي على 745 ملل، وهذا أقل من 750 ملل المكتوبة على ملصق العصير",
+                "description": "لا تلتزم الشركة بالمعيار، لأنه تم العثور في الفحص على قنينة تحتوي على 745 ملل، وهذا أقل من 750 ملل المكتوبة على ملصق العصير"
+              }
+            ]
+          },
+          "correctXapiResponsesPattern": [
+            "تلتزم الشركة بالمعيار وفق القانون - جميع قياسات الفحص (760-745 ملل) تقع ضمن المجال المسموح به وفق المعيار (765-735 ملل)"
           ]
         },
         {
@@ -75,9 +96,16 @@
             "فكرة غير جيدة – قد تضر بعملية القياس بأكملها",
             "لا يمكن التقدير"
           ],
-          "correctAnswers": [
-            "غير عمليّ. مكلف وبطيء. يمكن الاستنتاج من عيّنة ممثّلة"
-          ]
+          "correctAnswers": ["غير عمليّ. مكلف وبطيء. يمكن الاستنتاج من عيّنة ممثّلة"],
+          "xapiInteractionComponents": {
+            "choices": [
+              {"id": "اقتراح ممتاز – من الأفضل دائمًا التأكد", "description": "اقتراح ممتاز – من الأفضل دائمًا التأكد"},
+              {"id": "غير عمليّ. مكلف وبطيء. يمكن الاستنتاج من عيّنة ممثّلة", "description": "غير عمليّ. مكلف وبطيء. يمكن الاستنتاج من عيّنة ممثّلة"},
+              {"id": "فكرة غير جيدة – قد تضر بعملية القياس بأكملها", "description": "فكرة غير جيدة – قد تضر بعملية القياس بأكملها"},
+              {"id": "لا يمكن التقدير", "description": "لا يمكن التقدير"}
+            ]
+          },
+          "correctXapiResponsesPattern": ["غير عمليّ. مكلف وبطيء. يمكن الاستنتاج من عيّنة ممثّلة"]
         }
       ]
     }

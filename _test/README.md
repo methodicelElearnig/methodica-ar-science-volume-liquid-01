@@ -15,8 +15,8 @@ From the repo root, in PowerShell:
 
 ```powershell
 $env:NODE_PATH = "$env:TEMP\jstools\node_modules"
-node _test/verify-report.js      # 562 checks
-node _test/mutations.js          # 12 deliberate defects, each must make verify-report.js fail
+node _test/verify-report.js      # 717 checks
+node _test/mutations.js          # 17 deliberate defects, each must make verify-report.js fail
 ```
 
 Without jsdom/acorn the static sections still run and the rest is reported as skipped.
@@ -50,3 +50,9 @@ failed-gate paths, the issue-report POST, the YouTube canary, the character cros
 From methodica-math-ratio-01. Loaded only on localhost via `?xapiLib=../_test/xapi-720-k.js`.
 Console helpers: `__stmts()` `__state()` `__dupes()` `__reset()` `__failWrites(bool|status)`.
 It keys its store by state id, not by registration — start a second scenario with `?resetState`.
+
+## 2026-11-05 — same change as the Hebrew twin
+
+Section 6b (response format: correct answer = Kata pattern, every option resolves — including the
+Arabic labels' bidi marks), the resume-hardening shape and C1–C4 checks, runtime write-guard a–j and the
+leave save on `xapi-720-l.js` (stub `_test/xapi-720-l.js`). See the Hebrew unit's `_test/README.md`.
