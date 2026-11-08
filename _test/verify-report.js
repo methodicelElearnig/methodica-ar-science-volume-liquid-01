@@ -323,10 +323,9 @@ section('6b. result.response format');
   const HAS_LAYER = ['xapiResponse', 'xapiQMeta', '_xapiNorm'].every(f => typeof sandbox[f] === 'function');
   ok('unit', '20-xapi.js carries the response layer (xapiResponse, xapiQMeta)', HAS_LAYER);
   if (!HAS_LAYER) sandbox.xapiResponse = sandbox.xapiQMeta = () => ({ response: null, answers: [] }), sandbox._xapiNorm = s => s;
-  /* Known open item, deferred with the board's metadata pass: 01-007/q2 is a 4-blank sentence still
-     declared fill-in, with a pattern ("1: כלי, 2: …") no response format produces. It becomes
-     performance (stepId[.]value[,]…) when the metadata changes; the call site already passes values. */
-  const KNOWN = { '01-007/q2': 1 };
+  /* 01-007/q2 (4-blank sentence) is performance since 08.11.26: correctAnswers [{stepId, response}],
+     pattern stepId[.]value[,]…; the call site passes the four values in blank order. */
+  const KNOWN = {};
   for (const p of PARTS) {
     if (!meta[p]) continue;
     sandbox.window.METADATA = meta[p];
@@ -341,7 +340,8 @@ section('6b. result.response format');
         if (!Array.isArray(pat) || KNOWN[p + '-' + item + '/' + qKey]) continue;
         const ca = q.correctAnswers || [];
         const spec = { 'choice': { choices: ca }, 'matching': { pairs: ca }, 'sequencing': { order: ca },
-                       'true-false': { value: ca[0] }, 'numeric': { value: ca[0] }, 'fill-in': { values: ca } }[q.questionType] || { text: ca[0] };
+                       'true-false': { value: ca[0] }, 'numeric': { value: ca[0] }, 'fill-in': { values: ca },
+                       'performance': { values: ca.map(c => c.response) } }[q.questionType] || { text: ca[0] };
         warns.length = 0;
         const r = sandbox.xapiResponse(item, qKey, spec);
         ok(p, item + '/' + qKey + ' (' + q.questionType + '): the correct answer formats to the pattern, with no warning',

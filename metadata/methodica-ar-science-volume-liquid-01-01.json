@@ -159,12 +159,24 @@
         },
         {
           "questionId": "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-01/methodica-ar-science-volume-liquid-01-01-007/q2",
-          "questionType": "fill-in",
+          "questionType": "performance",
           "questionText": "أكملوا الجمل. القياس العلمي الجيد للسائل يحتاج إلى: ___ (1) مناسبة، قراءة ___ (2)، إجراء ___ (3) قياسات، وحساب ___ (4). اختاروا لكل مكان فارغ الكلمة المناسبة.",
-          "answers": [],
-          "correctAnswers": ["1: أداة، 2: على مستوى العينين، 3: ثلاث، 4: المعدل"],
-          "xapiInteractionComponents": null,
-          "correctXapiResponsesPattern": ["1: أداة، 2: على مستوى العينين، 3: ثلاث، 4: المعدل"]
+          "answers": null,
+          "correctAnswers": [
+            {"stepId": "1", "response": "أداة"},
+            {"stepId": "2", "response": "على مستوى العينين"},
+            {"stepId": "3", "response": "ثلاث"},
+            {"stepId": "4", "response": "المعدل"}
+          ],
+          "xapiInteractionComponents": {
+            "steps": [
+              {"id": "1", "description": null},
+              {"id": "2", "description": null},
+              {"id": "3", "description": null},
+              {"id": "4", "description": null}
+            ]
+          },
+          "correctXapiResponsesPattern": ["1[.]أداة[,]2[.]على مستوى العينين[,]3[.]ثلاث[,]4[.]المعدل"]
         }
       ]
     },
