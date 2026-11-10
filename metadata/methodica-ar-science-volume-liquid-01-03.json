@@ -7,7 +7,7 @@
   "recommendedAfterFail": [
     "https://lomdot.education.gov.il/metodica/720active/ar/science/volume-liquid/01/methodica-ar-science-volume-liquid-01-02/"
   ],
-  "isRequired": true,
+  "isRequired": false,
   "relativeDifficulty": 2,
   "masteryLevel": null,
   "order": 3,
